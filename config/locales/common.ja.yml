@@ -1,0 +1,13 @@
+ja:
+  button:
+    edit: 編集
+    back: 戻る
+    show: 詳細
+    index: 一覧
+    destroy: 削除
+  new_book: 新しい本
+  books: 本
+  messages:
+    confirm: 本当によろしいですか？
+  editing_book: 本の編集
+

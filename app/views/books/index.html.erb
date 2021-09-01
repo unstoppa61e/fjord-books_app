@@ -1,6 +1,3 @@
-<%= t 'everybody.e1' %>
-<%= t :hello %>
-
 <p id="notice"><%= notice %></p>
 
 <h1>Books</h1>
@@ -23,9 +20,9 @@
         <td><%= book.memo %></td>
         <td><%= book.author %></td>
         <td><%= book.picture %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('button.show'), book %></td>
+        <td><%= link_to t('button.edit'), edit_book_path(book) %></td>
+        <td><%= link_to t('button.destroy'), book, method: :delete, data: { confirm: t 'message.confirm' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Book', new_book_path %>
+<%= link_to t(:new_book), new_book_path %>

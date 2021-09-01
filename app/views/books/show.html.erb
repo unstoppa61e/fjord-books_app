@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong><%= Book.human_attribute_name('title') %></strong>
   <%= @book.title %>
 </p>
 
@@ -20,5 +20,5 @@
   <%= image_tag(@book.picture_url) if @book.picture.present? %>
 </p>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to t('button.edit'), edit_book_path(@book) %> |
+<%= link_to t('button.back'), books_path %>

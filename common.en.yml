@@ -1,0 +1,12 @@
+en:
+  button:
+    edit: Edit
+    back: Back
+    show: Show
+    index: Index
+    destroy: Destroy
+  new_book: "New Book"
+  books: Books
+  message:
+    confirm: "Are you sure?"
+  editing_book: "Editing Book"
