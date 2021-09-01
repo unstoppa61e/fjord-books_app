@@ -1,17 +1,21 @@
 ja:
+  books:
+    index:
+      destroy: 削除
+      title: 図書一覧
+      confirm: 本当によろしいですか？
+      add: 追加
+    new:
+      title: 図書データの追加
+    edit:
+      title: 図書データの編集
+    create:
+      notice: 図書データを作成しました。
+    update:
+      notice: 図書データを更新しました。
+    destroy:
+      notice: 図書データを削除しました。
   button:
-    edit: 編集
     back: 戻る
+    edit: 編集
     show: 詳細
-    index: 一覧
-    destroy: 削除
-  new_book: 新しい本
-  books: 本
-  message:
-    confirm: 本当によろしいですか？
-  editing_book: 本の編集
-  notice:
-    create: 本の作成に成功しました。
-    update: 本の更新に成功しました。
-    destroy: 本の削除に成功しました。
-
