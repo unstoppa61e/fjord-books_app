@@ -7,7 +7,11 @@ ja:
     destroy: 削除
   new_book: 新しい本
   books: 本
-  messages:
+  message:
     confirm: 本当によろしいですか？
   editing_book: 本の編集
+  notice:
+    create: 本の作成に成功しました。
+    update: 本の更新に成功しました。
+    destroy: 本の削除に成功しました。
 

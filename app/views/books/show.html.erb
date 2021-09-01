@@ -6,17 +6,17 @@
 </p>
 
 <p>
-  <strong>Memo:</strong>
+  <strong><%= Book.human_attribute_name('memo') %></strong>
   <%= @book.memo %>
 </p>
 
 <p>
-  <strong>Author:</strong>
+  <strong><%= Book.human_attribute_name('author') %></strong>
   <%= @book.author %>
 </p>
 
 <p>
-  <strong>Picture:</strong>
+  <strong><%= Book.human_attribute_name('picture') %></strong>
   <%= image_tag(@book.picture_url) if @book.picture.present? %>
 </p>
 
