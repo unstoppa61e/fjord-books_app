@@ -34,10 +34,10 @@ Book.create!(
 )
 
 99.times do |n|
-  title = Faker::Book.title
-  memo = Faker::Lorem.sentence(word_count: 0, random_words_to_add: 5)
-  author = Faker::Name.name
-  picture = n.even? ? picture_file('cherry-book.jpg') : nil
+  title = (n % 4).zero? ? nil : Faker::Book.title
+  memo = (n % 3).zero? ? nil : Faker::Lorem.sentence(word_count: 0, random_words_to_add: 5)
+  author = (n % 5).zero? ? nil : Faker::Name.name
+  picture = n.even? ? nil : picture_file('cherry-book.jpg')
   Book.create!(
     title: title,
     memo: memo,
