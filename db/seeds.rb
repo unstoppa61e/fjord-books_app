@@ -33,11 +33,11 @@ Book.create!(
   picture: picture_file('erd.jpg')
 )
 
-99.times do |n|
-  title = (n % 4).zero? ? nil : Faker::Book.title
-  memo = (n % 3).zero? ? nil : Faker::Lorem.sentence(word_count: 0, random_words_to_add: 5)
-  author = (n % 5).zero? ? nil : Faker::Name.name
-  picture = n.even? ? nil : picture_file('cherry-book.jpg')
+99.times do
+  title = Faker::Book.title
+  memo = Faker::Lorem.sentence
+  author = Faker::Name.name
+  picture = picture_file('cherry-book.jpg')
   Book.create!(
     title: title,
     memo: memo,
@@ -45,6 +45,5 @@ Book.create!(
     picture: picture
   )
 end
-
 
 puts '初期データの投入が完了しました。' # rubocop:disable Rails/Output
