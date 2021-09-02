@@ -7,6 +7,7 @@ ruby '3.0.1'
 
 gem 'faker'
 gem 'kaminari'
+gem 'rails-controller-testing'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0'
