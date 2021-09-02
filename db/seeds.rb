@@ -34,16 +34,15 @@ Book.create!(
 )
 
 99.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(
-    name:  name,
-    email: email,
-    password:              password,
-    password_confirmation: password,
-    activated: true,
-    activated_at: Time.zone.now
+  title = Faker::Book.title
+  memo = Faker::Lorem.sentence(word_count: 0, random_words_to_add: 5)
+  author = Faker::Name.name
+  picture = n.even? ? picture_file('cherry-book.jpg') : nil
+  Book.create!(
+    title: title,
+    memo: memo,
+    author: author,
+    picture: picture
   )
 end
 
