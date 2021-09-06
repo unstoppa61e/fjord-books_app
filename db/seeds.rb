@@ -10,6 +10,26 @@ def picture_file(name)
   File.open(Rails.root.join("db/seeds/#{name}"))
 end
 
+User.destroy_all
+
+User.create!(
+  email: 'example@fjord.com',
+  encrypted_password: Devise::Encryptor.digest(User, 'password'),
+  postal_code: '123-4567',
+  address: '東京都葛飾区亀有公園前派出所',
+  bio: 'ほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげ！ほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげ！'
+)
+
+99.times do |n|
+  User.create!(
+    email: "#{n}@fjord.com",
+    encrypted_password: Devise::Encryptor.digest(User, 'password'),
+    postal_code: '999-9999',
+    address: "北海道札幌市西区西野#{n}条#{n}丁目",
+    bio: "座右の銘:「#{n}度あることは#{n + 1}度ある」"
+  )
+end
+
 Book.destroy_all
 
 Book.create!(

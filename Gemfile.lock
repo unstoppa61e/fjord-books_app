@@ -295,7 +295,7 @@ DEPENDENCIES
   faker
   i18n_generators
   jbuilder (~> 2.7)
-  kaminari
+  kaminari (~> 1.2, >= 1.2.1)
   letter_opener_web (~> 1.4)
   listen (~> 3.3)
   puma (~> 5.0)
