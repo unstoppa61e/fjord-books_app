@@ -15,6 +15,10 @@ ja:
       notice: 図書データを更新しました。
     destroy:
       notice: 図書データを削除しました。
+  layouts:
+    header:
+      English: 英語
+      Japanese: 日本語
   button:
     back: 戻る
     edit: 編集

@@ -15,6 +15,10 @@ en:
       notice: "Book was successfully updated."
     destroy:
       notice: "Book was successfully destroyed."
+  layouts:
+    header:
+      English: English
+      Japanese: Japanese
   button:
     back: Back
     edit: Edit
