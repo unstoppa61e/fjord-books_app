@@ -1,5 +1,15 @@
 michael:
   email: michael@example.com
+  postal_code: 111-2323
+  address: "hoge state fuga city"
+  bio: "hi! hi! hi! hi!"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+josh:
+  email: josh@example.com
+  postal_code: 999-7777
+  address: "foo state bar city"
+  bio: "hello! hello! hello! hello! hello!"
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 <% 99.times do |n| %>
