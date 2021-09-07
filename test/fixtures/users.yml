@@ -1,11 +1,21 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+michael:
+  email: michael@example.com
+  postal_code: 111-2323
+  address: "hoge state fuga city"
+  self_introduction: "hi! hi! hi! hi!"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+josh:
+  email: josh@example.com
+  postal_code: 999-7777
+  address: "foo state bar city"
+  self_introduction: "hello! hello! hello! hello! hello!"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+<% 99.times do |n| %>
+  email: <%= "#{n}@fjord.com" %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  postal_code: 000-9999
+  address: <%= "北海道札幌市西区西野#{n}条#{n}丁目" %>
+  self_introduction: <%= "座右の銘:「#{n}度あることは#{n + 1}度ある」" %>
+<% end %>
