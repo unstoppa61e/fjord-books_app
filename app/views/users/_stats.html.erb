@@ -1,0 +1,15 @@
+<p>
+  <a href="<%= following_user_path(@user) %>">
+    <strong id="following">
+      <%= @user.following.count %>
+    </strong>
+  </a>
+  <%= Relationship.human_attribute_name(:following) %>
+  &emsp;
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers">
+      <%= @user.followers.count %>
+    </strong>
+  </a>
+  <%= Relationship.human_attribute_name(:followers) %>
+</p>
