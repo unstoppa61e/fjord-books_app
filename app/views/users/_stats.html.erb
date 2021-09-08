@@ -1,7 +1,7 @@
 <p>
-  <a href="<%= following_user_path(@user) %>">
+  <a href="<%= followings_user_path(@user) %>">
     <strong id="following">
-      <%= @user.following.count %>
+      <%= @user.followings.count %>
     </strong>
   </a>
   <%= Relationship.human_attribute_name(:following) %>

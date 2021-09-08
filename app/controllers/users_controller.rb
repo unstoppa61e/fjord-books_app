@@ -10,10 +10,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def following
+  def followings
     @user  = User.find(params[:id])
     @title = "#{@user.name} #{Relationship.human_attribute_name(:following)}"
-    @users = @user.following.with_attached_avatar.order(:id).page(params[:page])
+    @users = @user.followings.with_attached_avatar.order(:id).page(params[:page])
     render 'index'
   end
 
