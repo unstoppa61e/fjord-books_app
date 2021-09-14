@@ -1,21 +1,21 @@
 michael:
   email: michael@example.com
-  postal_code: 111-2323
-  address: "hoge state fuga city"
-  self_introduction: "hi! hi! hi! hi!"
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 josh:
   email: josh@example.com
-  postal_code: 999-7777
-  address: "foo state bar city"
-  self_introduction: "hello! hello! hello! hello! hello!"
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
+  encrypted_password: "password"
 
 <% 99.times do |n| %>
-  email: <%= "#{n}@fjord.com" %>
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  postal_code: 000-9999
-  address: <%= "北海道札幌市西区西野#{n}条#{n}丁目" %>
-  self_introduction: <%= "座右の銘:「#{n}度あることは#{n + 1}度ある」" %>
+  email: <%= "no_#{n}@example.com" %>
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
+  encrypted_password: "password"
 <% end %>
