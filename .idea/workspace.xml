@@ -2,10 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a94bd3b-27fd-4ee1-bc80-4906446f8ba0" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/.ruby-version" beforeDir="false" afterPath="$PROJECT_DIR$/.ruby-version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/helpers/sessions_helper.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/reports_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/reports_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/report.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/report.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/reports/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/_form.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/reports/_report.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/_report.json.jbuilder" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/reports/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/index.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/reports/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/new.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/reports/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/translation_ja.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/translation_ja.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20210908075326_create_reports.rb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/controllers/reports_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/reports_controller_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/reports.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/reports.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/system/reports_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/system/reports_test.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +108,7 @@
     <configuration name="spec: fjord-books_app" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="fjord-books_app" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
@@ -116,7 +132,7 @@
     <configuration name="test: fjord-books_app" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="fjord-books_app" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
@@ -151,6 +167,7 @@
       <option name="presentableId" value="Default" />
       <updated>1631050110845</updated>
       <workItem from="1631050112436" duration="19737000" />
+      <workItem from="1631569636510" duration="538000" />
     </task>
     <servers />
   </component>
@@ -167,5 +184,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

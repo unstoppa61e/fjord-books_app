@@ -18,40 +18,6 @@ end
 
 puts '実行中です。しばらくお待ちください...' # rubocop:disable Rails/Output
 
-Book.destroy_all
-
-Book.transaction do # rubocop:disable Metrics/BlockLength
-  Book.create!(
-    title: 'Ruby超入門',
-    memo: 'Rubyの文法の基本をやさしくていねいに解説しています。',
-    author: '五十嵐 邦明',
-    picture: picture_file('cho-nyumon.jpg')
-  )
-
-  Book.create!(
-    title: 'チェリー本',
-    memo: 'プログラミング経験者のためのRuby入門書です。',
-    author: '伊藤 淳一',
-    picture: picture_file('cherry-book.jpg')
-  )
-
-  Book.create!(
-    title: '楽々ERDレッスン',
-    memo: '実在する帳票から本当に使えるテーブル設計を導く画期的な本！',
-    author: '羽生 章洋',
-    picture: picture_file('erd.jpg')
-  )
-
-  55.times do
-    Book.create!(
-      title: Faker::Book.title,
-      memo: Faker::Book.genre,
-      author: Faker::Book.author,
-      picture: picture_file('no-image.png')
-    )
-  end
-end
-
 User.destroy_all
 
 User.transaction do
@@ -80,6 +46,75 @@ Relationship.destroy_all
 User.order(id: :desc).each do |user|
   User.where('id < ?', user.id).each do |other|
     user.follow(other)
+  end
+end
+
+Book.destroy_all
+
+Book.transaction do # rubocop:disable Metrics/BlockLength
+  Book.create!(
+    title: 'Ruby超入門',
+    memo: 'Rubyの文法の基本をやさしくていねいに解説しています。',
+    author: '五十嵐 邦明',
+    picture: picture_file('cho-nyumon.jpg')
+  )
+
+  Book.create!(
+    title: 'チェリー本',
+    memo: 'プログラミング経験者のためのRuby入門書です。',
+    author: '伊藤 淳一',
+    picture: picture_file('cherry-book.jpg')
+  )
+
+  Book.create!(
+    title: '楽々ERDレッスン',
+    memo: '実在する帳票から本当に使えるテーブル設計を導く画期的な本！',
+    author: '羽生 章洋',
+    picture: picture_file('erd.jpg')
+  )
+
+  55.times do |n|
+    Book.create!(
+      title: Faker::Book.title,
+      memo: Faker::Book.genre,
+      author: Faker::Book.author,
+      picture: picture_file('no-image.png'),
+    )
+  end
+end
+
+
+Report.destroy_all
+
+Report.transaction do # rubocop:disable Metrics/BlockLength
+  Report.create!(
+    title: '１日目',
+    content: 'いい感じ',
+    user_id: 1,
+    created_at: Time.zone.now - 1.day
+  )
+
+  Report.create!(
+    title: '２日目',
+    content: '超々いいかんじ',
+    user_id: 1,
+    created_at: Time.zone.now - 2.days
+  )
+
+  Report.create!(
+    title: '３日目',
+    content: '超々々々いいカンジ',
+    user_id: 1,
+    created_at: Time.zone.now - 3.days
+  )
+
+  55.times do |n|
+    Report.create!(
+      title: Faker::Lorem.word,
+      content: Faker::Lorem.sentence,
+      user_id: n % 5 + 1,
+      created_at: Time.zone.now - (n + 4).days
+    )
   end
 end
 

@@ -3,6 +3,11 @@ ja:
     models:
       book: 本  #g
       user: ユーザ
+      active_storage/attachment: アクティブストレージ/アタッチメント  #g
+      active_storage/blob: アクティブストレージ/ブロブ  #g
+      active_storage/variant_record: アクティブなストレージ/バリアントレコード  #g
+      relationship: 関係  #g
+      report: 日報
 
     attributes:
       book:
@@ -10,9 +15,54 @@ ja:
         memo: メモ  #g
         picture: 画像  #g
         title: 題名  #g
+
       user:
         name: 氏名
         postal_code: 郵便番号
         address: 住所
         self_introduction: 自己紹介文
         avatar: ユーザ画像
+        active_relationships: アクティブな関係  #g
+        avatar_attachment: :activerecord.models.avatar_attachment  #g
+        avatar_blob: :activerecord.models.avatar_blob  #g
+        email: Eメール  #g
+        encrypted_password: 暗号化パスワード  #g
+        followers: フォロワー  #g
+        followings: 以下  #g
+        passive_relationships: 受動的な関係  #g
+        remember_created_at: ログイン記憶時刻  #g
+        reset_password_sent_at: パスワードリセット送信時刻  #g
+        reset_password_token: パスワードリセット用トークン  #g
+
+      active_storage/attachment:
+        blob: :activerecord.models.blob  #g
+        name: 名前  #g
+        record: :activerecord.models.record  #g
+        record_type: レコードタイプ  #g
+
+      active_storage/blob:
+        attachments: 添付ファイル  #g
+        byte_size: バイトサイズ  #g
+        checksum: チェックサム  #g
+        content_type: コンテンツタイプ  #g
+        filename: ファイル名  #g
+        key: 鍵  #g
+        metadata: メタデータ  #g
+        preview_image_attachment: :activerecord.models.preview_image_attachment  #g
+        preview_image_blob: :activerecord.models.preview_image_blob  #g
+        service_name: サービス名  #g
+        variant_records: バリアントレコード  #g
+
+      active_storage/variant_record:
+        blob: :activerecord.models.blob  #g
+        image_attachment: :activerecord.models.image_attachment  #g
+        image_blob: :activerecord.models.image_blob  #g
+        variation_digest: バリエーションダイジェスト  #g
+
+      relationship:
+        follower: :activerecord.models.follower  #g
+        following: :activerecord.models.following  #g
+
+      report:
+        title: 題名  #g
+        content: コンテンツ  #g

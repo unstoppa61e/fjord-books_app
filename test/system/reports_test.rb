@@ -14,7 +14,7 @@ class ReportsTest < ApplicationSystemTestCase
     visit reports_url
     click_on "New Report"
 
-    fill_in "Cotent", with: @report.cotent
+    fill_in "Content", with: @report.content
     fill_in "Title", with: @report.title
     click_on "Create Report"
 
@@ -26,7 +26,7 @@ class ReportsTest < ApplicationSystemTestCase
     visit reports_url
     click_on "Edit", match: :first
 
-    fill_in "Cotent", with: @report.cotent
+    fill_in "Content", with: @report.content
     fill_in "Title", with: @report.title
     click_on "Update Report"
 
