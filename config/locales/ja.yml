@@ -204,6 +204,8 @@ ja:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
+      report: "%Y年%m月%d日"
+      comment: "%Y年%m月%d日(%a) %H:%M"
     pm: 午後
   views:
     common:
@@ -255,3 +257,11 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  reports:
+    index:
+      created_at: 作成日
+  comments:
+    comments:
+      no_comments: コメントはまだありません
+      deleted_user: 退会済みユーザー
+

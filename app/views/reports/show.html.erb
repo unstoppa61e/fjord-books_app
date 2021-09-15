@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @report.title %>
@@ -9,6 +7,9 @@
   <strong>Content:</strong>
   <%= @report.content %>
 </p>
+
+<%= render partial: 'comments/comments', locals: {comments: @report.comments} %>
+<%= render partial: 'comments/form', locals: {commentable: @report} %>
 
 <% if current_user?(@report.user) %>
   <%= link_to t('views.common.edit'), edit_report_path(@report) %> |

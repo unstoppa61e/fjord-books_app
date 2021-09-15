@@ -1,11 +1,35 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+michael:
+  email: michael@example.com
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+josh:
+  email: josh@example.com
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
+  encrypted_password: "password"
+
+hoge:
+  email: hoge@example.com
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+fuga:
+  email: fuga@example.com
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
+  encrypted_password: "password"
+
+<% 99.times do |n| %>
+  email: <%= "no_#{n}@example.com" %>
+  postal_code: <%= Faker::Address.postcode %>
+  address: <%= Faker::Address.full_address %>
+  self_introduction: <%= Faker::Lorem.sentences %>
+  encrypted_password: "password"
+<% end %>

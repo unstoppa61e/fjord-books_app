@@ -1,0 +1,18 @@
+<h2><%= Comment.model_name.human %></h2>
+<% if comments.empty? %>
+  <div><%= t '.no_comments' %></div>
+<% else %>
+  <% comments.each do |comment| %>
+    <div>
+      <% user = User.find(comment.user_id) %>
+      <% if user.nil? %>
+        <div><%= t '.deleted_user' %></div>
+      <% else %>
+        <% user_info = user.name.blank? ? user.email : user.name %>
+        <div><%= link_to user_info, user %></div>
+      <% end %>
+      <div><%= l comment.created_at, format: :comment %></div>
+      <div><%= comment.body %></div>
+    </div>
+  <% end %>
+<% end %>

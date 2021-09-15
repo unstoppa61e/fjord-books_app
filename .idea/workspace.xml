@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a94bd3b-27fd-4ee1-bc80-4906446f8ba0" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/app/helpers/sessions_helper.rb" afterDir="false" />
+    <list default="true" id="eeaeacf9-9908-4e06-928f-23f35682d73e" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/app/views/comments/_form.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/reports_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/reports_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/book.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/book.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/report.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/report.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/validators/created_at_validator.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/created_at_validator.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/books/_form.html.erb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/books/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/books/show.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/reports/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/reports/_report.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/_report.json.jbuilder" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/reports/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/reports/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/new.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/reports/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/reports/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/application.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/application.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/ja.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/ja.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/locales/translation_ja.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/translation_ja.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20210908075326_create_reports.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/controllers/reports_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/reports_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/reports.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/reports.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/system/reports_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/system/reports_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/relationships.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/relationships.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/users.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/users.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +39,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="ProjectId" id="1xpRasRJkeCO2fyykpvdkW4zUZg" />
+  <component name="ProjectId" id="1y9NcBFgbm8lt9MLRTB418Z7CHa" />
   <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -54,12 +54,17 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views/comments" />
+    </key>
+  </component>
   <component name="RunManager" selected="Rails.Development: fjord-books_app">
     <configuration name="Development: fjord-books_app" type="RailsRunConfigurationType" factoryName="Rails">
       <module name="fjord-books_app" />
       <predefined_log_file enabled="true" id="RUBY_RAILS_SERVER" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
-      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
@@ -84,7 +89,7 @@
       <module name="fjord-books_app" />
       <predefined_log_file enabled="true" id="RUBY_RAILS_SERVER" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
-      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
@@ -161,13 +166,12 @@
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="デフォルトタスク">
-      <changelist id="4a94bd3b-27fd-4ee1-bc80-4906446f8ba0" name="変更" comment="" />
-      <created>1631050110845</created>
+      <changelist id="eeaeacf9-9908-4e06-928f-23f35682d73e" name="変更" comment="" />
+      <created>1631659921073</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1631050110845</updated>
-      <workItem from="1631050112436" duration="19737000" />
-      <workItem from="1631569636510" duration="538000" />
+      <updated>1631659921073</updated>
+      <workItem from="1631659922669" duration="13490000" />
     </task>
     <servers />
   </component>
@@ -184,6 +188,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

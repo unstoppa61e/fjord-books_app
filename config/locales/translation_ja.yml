@@ -8,6 +8,7 @@ ja:
       active_storage/variant_record: アクティブなストレージ/バリアントレコード  #g
       relationship: 関係  #g
       report: 日報
+      comment: コメント  #g
 
     attributes:
       book:
@@ -15,6 +16,7 @@ ja:
         memo: メモ  #g
         picture: 画像  #g
         title: 題名  #g
+        comments: コメント  #g
 
       user:
         name: 氏名
@@ -33,6 +35,7 @@ ja:
         remember_created_at: ログイン記憶時刻  #g
         reset_password_sent_at: パスワードリセット送信時刻  #g
         reset_password_token: パスワードリセット用トークン  #g
+        reports: レポート  #g
 
       active_storage/attachment:
         blob: :activerecord.models.blob  #g
@@ -66,3 +69,10 @@ ja:
       report:
         title: 題名  #g
         content: コンテンツ  #g
+        comments: コメント  #g
+        user: :activerecord.models.user  #g
+
+      comment:
+        body: 体  #g
+        commentable: :activerecord.models.commentable  #g
+        commentable_type: コメント可能なタイプ  #g
