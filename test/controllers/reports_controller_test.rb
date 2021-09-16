@@ -7,8 +7,8 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     Warden.test_mode!
-    @report = reports(:one)
     @user = users(:michael)
+    @report = reports(:one)
   end
 
   test 'should get index' do
@@ -33,18 +33,9 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_url
   end
 
-  test 'should create report' do
-    login_as(@user)
-    assert_difference('report.count') do
-      post reports_url, params: { report: { memo: @report.memo, title: @report.title } }
-    end
-
-    assert_redirected_to report_url(report.last)
-  end
-
   test 'should not create report' do
-    assert_no_difference('report.count') do
-      post reports_url, params: { report: { memo: @report.memo, title: @report.title } }
+    assert_no_difference('Report.count') do
+      post reports_url, params: { report: { title: @report.title, content: @report.content, user_id: @user.id } }
     end
 
     assert_redirected_to new_user_session_url
@@ -72,29 +63,14 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_url
   end
 
-  test 'should update report' do
-    login_as(@user)
-    patch report_url(@report), params: { report: { memo: @report.memo, title: @report.title } }
-    assert_redirected_to report_url(@report)
-  end
-
   test 'should not update report' do
-    patch report_url(@report), params: { report: { memo: @report.memo, title: @report.title } }
+    patch report_url(@report), params: { report: { title: @report.title, content: @report.content } }
 
     assert_redirected_to new_user_session_url
   end
 
-  test 'should destroy report' do
-    login_as(@user)
-    assert_difference('report.count', -1) do
-      delete report_url(@report)
-    end
-
-    assert_redirected_to reports_url
-  end
-
   test 'should not destroy report' do
-    assert_no_difference 'report.count' do
+    assert_no_difference 'Report.count' do
       delete report_url(@report)
     end
 

@@ -17,8 +17,7 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    @report = Report.new(report_params)
-
+    @report = current_user.reports.build(report_params)
     if @report.save
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
@@ -36,7 +35,7 @@ class ReportsController < ApplicationController
 
   def destroy
     @report.destroy
-    redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
+    redirect_back fallback_location: root_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human), status: 303
   end
 
   private
