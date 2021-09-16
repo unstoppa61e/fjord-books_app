@@ -8,7 +8,7 @@
   <%= @report.content %>
 </p>
 
-<%= render partial: 'comments/comments', locals: {comments: @report.comments} %>
+<%= render partial: 'comments/comments', locals: {commentable: @report} %>
 <%= render partial: 'comments/form', locals: {commentable: @report} %>
 
 <% if current_user?(@report.user) %>

@@ -1,18 +1,23 @@
 <h2><%= Comment.model_name.human %></h2>
-<% if comments.empty? %>
+<% if commentable.comments.empty? %>
   <div><%= t '.no_comments' %></div>
 <% else %>
-  <% comments.each do |comment| %>
-    <div>
-      <% user = User.find(comment.user_id) %>
-      <% if user.nil? %>
-        <div><%= t '.deleted_user' %></div>
-      <% else %>
-        <% user_info = user.name.blank? ? user.email : user.name %>
-        <div><%= link_to user_info, user %></div>
-      <% end %>
-      <div><%= l comment.created_at, format: :comment %></div>
-      <div><%= comment.body %></div>
-    </div>
+  <% commentable.comments.each do |comment| %>
+    <% user = User.find(comment.user_id) %>
+    <% if user.nil? %>
+      <div><%= t '.deleted_user' %></div>
+    <% else %>
+      <% user_info = user.name.blank? ? user.email : user.name %>
+      <div><%= link_to user_info, user %></div>
+    <% end %>
+    <div><%= l comment.created_at, format: :comment %></div>
+    <div><%= comment.body %></div>
+    <% if comment.user_id == current_user.id %>
+      <div>
+        <%= link_to t('views.common.edit'), [:edit, commentable, comment] %>
+        &nbsp;
+        <%= link_to t('views.common.destroy'), [commentable, comment], method: :delete, data: { confirm: t('views.common.delete_confirm') }  %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>

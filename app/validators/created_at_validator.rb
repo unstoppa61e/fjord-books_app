@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CreatedAtValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
+  def validate_each(record, _, _)
     current_time = Time.zone.now
     from = current_time.beginning_of_day
     to = current_time.end_of_day

@@ -1,6 +1,6 @@
 <%= form_with(model: [commentable, Comment.new], method: :post, local: true) do |form| %>
   <div class="field">
-    <%= form.text_area :body, placeholder: Comment.model_name.human %>
+    <%= form.text_area :body, required: true, placeholder: Comment.model_name.human %>
   </div>
 
   <div class="actions">

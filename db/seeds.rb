@@ -73,16 +73,15 @@ Book.transaction do # rubocop:disable Metrics/BlockLength
     picture: picture_file('erd.jpg')
   )
 
-  55.times do |n|
+  55.times do
     Book.create!(
       title: Faker::Book.title,
       memo: Faker::Book.genre,
       author: Faker::Book.author,
-      picture: picture_file('no-image.png'),
+      picture: picture_file('no-image.png')
     )
   end
 end
-
 
 Report.destroy_all
 
@@ -114,6 +113,50 @@ Report.transaction do # rubocop:disable Metrics/BlockLength
       content: Faker::Lorem.sentence,
       user_id: n % 5 + 1,
       created_at: Time.zone.now - (n + 4).days
+    )
+  end
+end
+
+Comment.destroy_all
+
+Comment.transaction do # rubocop:disable Metrics/BlockLength
+  Comment.create!(
+    body: 'body1',
+    commentable: Book.first,
+    user_id: 1
+  )
+
+  Comment.create!(
+    body: 'body2',
+    commentable: Book.first,
+    user_id: 2
+  )
+
+  Comment.create!(
+    body: 'body3',
+    commentable: Report.first,
+    user_id: 1
+  )
+
+  Comment.create!(
+    body: 'body4',
+    commentable: Report.first,
+    user_id: 3
+  )
+
+  20.times do |n|
+    Comment.create!(
+      body: Faker::Lorem.sentence,
+      commentable: Book.all[n % 3],
+      user_id: n % 4 + 1
+    )
+  end
+
+  20.times do |n|
+    Comment.create!(
+      body: Faker::Lorem.sentence,
+      commentable: Report.all[n % 4],
+      user_id: n % 3 + 1
     )
   end
 end
