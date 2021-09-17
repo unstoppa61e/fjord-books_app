@@ -6,6 +6,7 @@ class CommentsInterfaceTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
   setup do
+    Warden.test_mode!
     @user = users(:michael)
     @report = reports(:two)
   end
@@ -24,26 +25,20 @@ class CommentsInterfaceTest < ActionDispatch::IntegrationTest
     login_as(@user)
     get report_path(@report)
     # 無効な送信
-    assert_no_difference 'Comment.count' do
-      post report_comments_path(params: { comment: { body: '' } }, report_id: @report.id)
-    end
+    post report_comments_path(params: { comment: { body: '' } }, report_id: @report.id)
     assert_redirected_to report_path(@report)
     follow_redirect!
     assert_select 'p#alert'
     # 有効な送信
     body = 'creating comment success'
-    assert_difference 'Comment.count', 1 do
-      post report_comments_path(params: { comment: { body: body } }, report_id: @report.id)
-    end
+    post report_comments_path(params: { comment: { body: body } }, report_id: @report.id)
     assert_redirected_to report_path(@report)
     follow_redirect!
     assert_match body, response.body
-    comment = @report.comments.last
-    assert_select 'a[href=?]', edit_report_comment_path(report_id: @report.id, id: comment.id), text: I18n.t('views.common.edit'), count: 1
-    assert_select 'a[href=?]', report_comment_path(report_id: @report.id, id: comment.id), text: I18n.t('views.common.destroy'), count: 1
+    comment_id = @report.comments.last.id
+    assert_select 'a[href=?]', edit_report_comment_path(report_id: @report.id, id: comment_id), text: I18n.t('views.common.edit'), count: 1
+    assert_select 'a[href=?]', report_comment_path(report_id: @report.id, id: comment_id), text: I18n.t('views.common.destroy'), count: 1
     # 投稿を削除する
-    assert_difference 'Comment.count', -1 do
-      delete report_comment_path(id: comment.id, report_id: @report.id)
-    end
+    delete report_comment_path(id: comment_id, report_id: @report.id)
   end
 end

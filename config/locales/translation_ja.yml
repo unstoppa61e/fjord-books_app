@@ -68,11 +68,11 @@ ja:
 
       report:
         title: 題名  #g
-        content: コンテンツ  #g
+        content: 内容
         comments: コメント  #g
         user: :activerecord.models.user  #g
 
       comment:
-        body: 体  #g
+        body: コメント
         commentable: :activerecord.models.commentable  #g
         commentable_type: コメント可能なタイプ  #g

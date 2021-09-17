@@ -100,4 +100,11 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_user_session_url
   end
+
+  test 'should destroy dependent comment' do
+    login_as(@user)
+    assert_difference('Comment.count', -1) do
+      delete book_url(@book)
+    end
+  end
 end
