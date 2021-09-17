@@ -16,18 +16,14 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if @comment.destroy
-      redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Book.model_name.human)
-    else
-
-    end
+    @comment.destroy
+    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Book.model_name.human)
   end
 
   def edit; end
 
   def update
     if @comment.update(comment_params)
-      # redirect_to [@commentable, { id: @commentable.id }], notice: t('controllers.common.notice_update', name: Comment.model_name.human)
       redirect_to @commentable, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
       redirect_to [:edit, @commentable, @comment], alert: "#{Comment.model_name.human}#{t 'errors.messages.blank'}"

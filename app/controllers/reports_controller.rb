@@ -34,11 +34,8 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    if @report.destroy
-      redirect_to reports_path, notice: t('controllers.common.notice_destroy', name: Report.model_name.human), status: 303
-    else
-
-    end
+    @report.destroy
+    redirect_to reports_path, notice: t('controllers.common.notice_destroy', name: Report.model_name.human), status: 303
   end
 
   private

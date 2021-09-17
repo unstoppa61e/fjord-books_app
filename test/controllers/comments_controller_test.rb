@@ -42,5 +42,6 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Comment.count' do
       delete report_comment_path(id: @other_user_comment.id, report_id: @other_user_comment.commentable_id)
     end
+    assert_redirected_to root_url
   end
 end

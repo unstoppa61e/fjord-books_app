@@ -10,6 +10,7 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
     @user_no_name = users(:no_name)
     @report = reports(:one)
+    @other_user_report = reports(:two)
     @report_with_comment = reports(:three)
   end
 
@@ -96,12 +97,21 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'should not destroy report' do
+  test 'should not destroy report when not logged in' do
     assert_no_difference 'Report.count' do
       delete report_url(@report)
     end
 
     assert_redirected_to new_user_session_url
+  end
+
+  test 'should not destroy other user report' do
+    login_as(@user)
+    assert_no_difference 'Report.count' do
+      delete report_url(@other_user_report)
+    end
+
+    assert_redirected_to root_url
   end
 
   test 'should destroy dependent comment' do
