@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       name = Comment.model_name.human
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: name)
     else
-      render :new
+      redirect_to @commentable, alert: "#{Comment.model_name.human}#{t 'errors.messages.blank'}"
     end
   end
 
