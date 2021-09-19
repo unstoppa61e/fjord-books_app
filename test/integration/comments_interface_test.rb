@@ -9,6 +9,8 @@ class CommentsInterfaceTest < ActionDispatch::IntegrationTest
     Warden.test_mode!
     @user = users(:michael)
     @report = reports(:two)
+    @no_name_user = users(:no_name)
+    @no_comments_report = reports(:report15)
   end
 
   test 'default comment interface' do
@@ -40,5 +42,30 @@ class CommentsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', report_comment_path(report_id: @report.id, id: comment_id), text: I18n.t('views.common.destroy'), count: 1
     # 投稿を削除する
     delete report_comment_path(id: comment_id, report_id: @report.id)
+  end
+
+  test 'comment author name or email display' do
+    login_as(@no_name_user)
+    get report_path(@report)
+    users = @report.comments.map { |comment| User.find(comment.user_id) }
+    users.each do |user|
+      assert_match user.name, response.body
+      assert_no_match user.email, response.body
+    end
+    body = 'comment by no name user'
+    post report_comments_path(params: { comment: { body: body } }, report_id: @report.id)
+    get report_path(@report)
+    assert_no_match @no_name_user.name, response.body
+    assert_match @no_name_user.email, response.body
+  end
+
+  test 'comment message when no comments posted' do
+    login_as(@user)
+    get report_path(@no_comments_report)
+    assert_match I18n.t('comments.comments.no_comments'), response.body
+    body = 'first comment to the report'
+    post report_comments_path(params: { comment: { body: body } }, report_id: @no_comments_report.id)
+    get report_path(@no_comments_report)
+    assert_no_match I18n.t('comments.comments.no_comments'), response.body
   end
 end

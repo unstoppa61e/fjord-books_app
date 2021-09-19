@@ -20,7 +20,7 @@ three:
   created_at: <%= Time.zone.now - 3.days %>
 
 <% 20.times do |n| %>
-report_<%= n %>:
+report<%= n %>:
   title: <%= Faker::Lorem.word %>
   content: <%= Faker::Lorem.sentence %>
   user_id: <%= n % 5 + 1 %>
