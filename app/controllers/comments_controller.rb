@@ -9,10 +9,11 @@ class CommentsController < ApplicationController
     comment.user_id = current_user.id
     if comment.save
       name = Comment.model_name.human
-      redirect_to @commentable, notice: t('controllers.common.notice_create', name: name)
+      flash[:notice] = t('controllers.common.notice_create', name: name)
     else
-      redirect_to @commentable, alert: "#{Comment.model_name.human}#{t 'errors.messages.blank'}"
+      flash[:alert] = comment.errors.full_messages.first
     end
+    redirect_to @commentable
   end
 
   def destroy

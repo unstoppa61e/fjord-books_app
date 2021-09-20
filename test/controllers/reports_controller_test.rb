@@ -20,20 +20,10 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should redirect index when not logged in' do
-    get reports_url
-    assert_redirected_to new_user_session_url
-  end
-
   test 'should get new' do
     login_as(@user)
     get new_report_url
     assert_response :success
-  end
-
-  test 'should redirect new when not logged in' do
-    get new_report_url
-    assert_redirected_to new_user_session_url
   end
 
   test 'should create report but only once' do
@@ -72,20 +62,10 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should redirect show when not logged in' do
-    get report_url(@report)
-    assert_redirected_to new_user_session_url
-  end
-
   test 'should get edit' do
     login_as(@user)
     get edit_report_url(@report)
     assert_response :success
-  end
-
-  test 'should redirect edit when not logged in' do
-    get edit_report_url(@report)
-    assert_redirected_to new_user_session_url
   end
 
   test 'should update report' do
@@ -101,14 +81,10 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
       post reports_url, params: { report: { title: '', content: '', user_id: @user.id } }
     end
     assert_redirected_to reports_url
-    # patch report_url(Report.last), params: { report: { title: '', content: 'updated!', user_id: @user.id } }
-
-  end
-
-  test 'should not update report when not logged in' do
-    patch report_url(@report), params: { report: { title: @report.title, content: @report.content } }
-
-    assert_redirected_to new_user_session_url
+    content = 'updated!'
+    patch report_url(Report.last), params: { report: { title: '', content: content, user_id: @user.id } }
+    follow_redirect!
+    assert_match content, response.body
   end
 
   test 'should destroy report' do
@@ -116,14 +92,6 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Report.count', -1) do
       delete report_url(@report)
     end
-  end
-
-  test 'should not destroy report when not logged in' do
-    assert_no_difference 'Report.count' do
-      delete report_url(@report)
-    end
-
-    assert_redirected_to new_user_session_url
   end
 
   test 'should not destroy other user report' do
