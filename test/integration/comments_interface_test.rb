@@ -11,6 +11,7 @@ class CommentsInterfaceTest < ActionDispatch::IntegrationTest
     @report = reports(:two)
     @no_name_user = users(:no_name)
     @no_comments_report = reports(:report15)
+    @other_user_comment = comments(:other_user_comment)
   end
 
   test 'default comment interface' do
@@ -67,5 +68,17 @@ class CommentsInterfaceTest < ActionDispatch::IntegrationTest
     post report_comments_path(params: { comment: { body: body } }, report_id: @no_comments_report.id)
     get report_path(@no_comments_report)
     assert_no_match I18n.t('comments.comments.no_comments'), response.body
+  end
+
+  test 'comment user name change after the account deleted' do
+    login_as(@user)
+    commented_report = Report.find(@other_user_comment.commentable_id)
+    get report_path(commented_report)
+    assert_no_match I18n.t('comments.comments.deleted_user'), response.body
+    assert_difference('User.count', -1) do
+      User.find(@other_user_comment.user_id).destroy
+    end
+    get report_path(commented_report)
+    assert_match I18n.t('comments.comments.deleted_user'), response.body
   end
 end

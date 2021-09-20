@@ -3,7 +3,7 @@
   <div><%= t '.no_comments' %></div>
 <% else %>
   <% commentable.comments.each do |comment| %>
-    <% user = User.find(comment.user_id) %>
+    <% user = User.find_by(id: comment.user_id) %>
     <% if user.nil? %>
       <div><%= t '.deleted_user' %></div>
     <% else %>
