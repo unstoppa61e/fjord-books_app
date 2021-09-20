@@ -9,6 +9,6 @@ class CreateComments < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :comments, %i[created_at]
+    add_index :comments, :created_at
   end
 end

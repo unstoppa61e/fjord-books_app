@@ -8,6 +8,6 @@ class CreateReports < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :reports, %i[created_at]
+    add_index :reports, :created_at
   end
 end
