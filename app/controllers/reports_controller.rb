@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
   before_action :correct_user, only: %i[edit update destroy]
 
   def index
-    @reports = Report.order(created_at: :desc, id: :asc).page(params[:page])
+    @reports = Report.order(created_at: :desc).page(params[:page])
   end
 
   def show; end
