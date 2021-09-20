@@ -90,7 +90,7 @@ Report.transaction do # rubocop:disable Metrics/BlockLength
     title: '１日目',
     content: 'いい感じ',
     user_id: 1,
-    created_at: Time.zone.now - 1.day
+    created_at: Time.zone.now - 3.day
   )
 
   Report.create!(
@@ -104,7 +104,7 @@ Report.transaction do # rubocop:disable Metrics/BlockLength
     title: '３日目',
     content: '超々々々いいカンジ',
     user_id: 1,
-    created_at: Time.zone.now - 3.days
+    created_at: Time.zone.now - 1.days
   )
 
   55.times do |n|

@@ -8,5 +8,6 @@ class CreateReports < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_index :reports, %i[user_id created_at]
   end
 end

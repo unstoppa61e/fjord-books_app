@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to @commentable, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
-      redirect_to [:edit, @commentable, @comment], alert: "#{Comment.model_name.human}#{t 'errors.messages.blank'}"
+      render :edit
     end
   end
 

@@ -67,7 +67,7 @@ ja:
         following: :activerecord.models.following  #g
 
       report:
-        title: 題名  #g
+        title: タイトル
         content: 内容
         comments: コメント  #g
         user: :activerecord.models.user  #g

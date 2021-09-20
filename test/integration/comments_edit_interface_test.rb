@@ -19,9 +19,7 @@ class CommentsEditInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', book_path(@book), count: 1
     # 無効な送信
     patch book_comment_path(params: { comment: { body: '' } }, book_id: @book.id, id: @comment.id)
-    assert_redirected_to [:edit, @book, @comment]
-    follow_redirect!
-    assert_select 'p#alert'
+    assert_template 'comments/edit'
     # 有効な送信
     body = 'updating comment success'
     patch book_comment_path(params: { comment: { body: body } }, book_id: @book.id, id: @comment.id)

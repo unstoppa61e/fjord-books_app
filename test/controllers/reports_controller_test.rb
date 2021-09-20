@@ -41,9 +41,20 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Report.count', 1) do
       post reports_url, params: { report: { title: '', content: '', user_id: @user.id } }
     end
-    assert_redirected_to Report.last
+    assert_redirected_to reports_url
     assert_no_difference('Report.count') do
       post reports_url, params: { report: { title: '', content: '', user_id: @user.id } }
+    end
+  end
+
+  test 'should create report when creation date is the same as other user report' do
+    login_as(@user)
+    assert_difference('Report.count', 1) do
+      post reports_url, params: { report: { title: '', content: '', user_id: @user.id } }
+    end
+    login_as(@user_no_name)
+    assert_difference('Report.count', 1) do
+      post reports_url, params: { report: { title: '', content: '', user_id: @user_no_name.id } }
     end
   end
 
@@ -79,12 +90,22 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update report' do
     login_as(@user)
-    patch report_url(@report), params: { report: { title: '', content: '' } }
+    patch report_url(@report), params: { report: { title: '', content: '', user_id: @user.id } }
 
-    assert_redirected_to @report
+    assert_redirected_to reports_url
   end
 
-  test 'should not update report' do
+  test 'should update report when the updating date is the same as other report creation date' do
+    login_as(@user)
+    assert_difference('Report.count', 1) do
+      post reports_url, params: { report: { title: '', content: '', user_id: @user.id } }
+    end
+    assert_redirected_to reports_url
+    # patch report_url(Report.last), params: { report: { title: '', content: 'updated!', user_id: @user.id } }
+
+  end
+
+  test 'should not update report when not logged in' do
     patch report_url(@report), params: { report: { title: @report.title, content: @report.content } }
 
     assert_redirected_to new_user_session_url
