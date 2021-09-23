@@ -98,6 +98,11 @@ GEM
       devise (>= 4.7.1)
     dummy_text_jp (0.0.2)
     erubi (1.10.0)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     faker (2.17.0)
       i18n (>= 1.6, < 2)
     ffi (1.15.0)
@@ -291,6 +296,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dummy_text_jp
+  factory_bot_rails (~> 6.2)
   faker
   i18n_generators
   image_processing (~> 1.2)
@@ -313,7 +319,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.0.1p64
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.2.15
+   2.2.27
