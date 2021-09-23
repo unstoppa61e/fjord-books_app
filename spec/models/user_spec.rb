@@ -22,4 +22,99 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:email]).to include(I18n.t('errors.messages.taken'))
   end
+
+  it "returns name when the user has a name" do
+    user = User.create(
+      name: 'name',
+      email: "hoge@example.com",
+      password: "password"
+    )
+    expect(user.name_or_email).to eq(user.name)
+  end
+
+  it "returns email address when the user doesn't have a name" do
+    user = User.create(
+      email: "hoge@example.com",
+      password: "password"
+    )
+    expect(user.name_or_email).to eq(user.email)
+  end
+
+  it "creates an active relationship" do
+    user1 = User.create(
+      email: "hoge@example.com",
+      password: "password"
+    )
+    user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    user1.follow(user2)
+    expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
+  end
+
+  it "destroys an active relationship" do
+    user1 = User.create(
+      email: "hoge@example.com",
+      password: "password"
+    )
+    user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    user1.follow(user2)
+    expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
+    user1.unfollow(user2)
+    expect(Relationship.find_by(follower_id: user1.id)).to eq(nil)
+  end
+
+  it 'returns true when the user is following the target user' do
+    user1 = User.create(
+      email: "hoge@example.com",
+      password: "password"
+    )
+    user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    user1.follow(user2)
+    expect(user1.following?(user2)).to eq(true)
+  end
+
+  it 'returns false when the user is not following the target user' do
+    user1 = User.create(
+      email: "hoge@example.com",
+      password: "password"
+    )
+    user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    expect(user1.following?(user2)).to eq(false)
+  end
+
+  it 'returns true when the user is followed by the target user' do
+    user1 = User.create(
+      email: "hoge@example.com",
+      password: "password"
+    )
+    user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    user2.follow(user1)
+    expect(user1.followed_by?(user2)).to eq(true)
+  end
+
+  it 'returns false when the user is not following the target user' do
+    user1 = User.create(
+      email: "hoge@example.com",
+      password: "password"
+    )
+    user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    expect(user1.followed_by?(user2)).to eq(false)
+  end
 end
