@@ -33,6 +33,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
+
+  gem 'faker'
 end
 
 group :development do
@@ -46,6 +49,8 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+
+  gem 'spring-commands-rspec'
 end
 
 group :test do
