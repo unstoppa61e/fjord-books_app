@@ -316,7 +316,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dummy_text_jp
-  factory_bot_rails (~> 6.2)
+  factory_bot_rails
   faker
   i18n_generators
   image_processing (~> 1.2)
