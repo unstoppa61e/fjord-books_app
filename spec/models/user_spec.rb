@@ -1,20 +1,29 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @user1 = User.create(
+      name: 'user1',
+      email: "hoge@example.com",
+      password: "password"
+    )
+    @user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+  end
+
   it 'is valid with an email address and a password' do
     user = User.new(
-      email: "hoge@example.com",
+      email: "foo@example.com",
       password: "password"
     )
     expect(user).to be_valid
   end
 
   it 'is invalid with a duplicate email address' do
-    User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
     user = User.new(
       email: "hoge@example.com",
       password: "password"
@@ -24,97 +33,40 @@ RSpec.describe User, type: :model do
   end
 
   it "returns name when the user has a name" do
-    user = User.create(
-      name: 'name',
-      email: "hoge@example.com",
-      password: "password"
-    )
-    expect(user.name_or_email).to eq(user.name)
+    expect(@user1.name_or_email).to eq(@user1.name)
   end
 
   it "returns email address when the user doesn't have a name" do
-    user = User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
-    expect(user.name_or_email).to eq(user.email)
+    expect(@user2.name_or_email).to eq(@user2.email)
   end
 
   it "creates an active relationship" do
-    user1 = User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
-    user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-    user1.follow(user2)
-    expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
+    @user1.follow(@user2)
+    expect(Relationship.find_by(follower_id: @user1.id).following_id).to eq(@user2.id)
   end
 
   it "destroys an active relationship" do
-    user1 = User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
-    user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-    user1.follow(user2)
-    expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
-    user1.unfollow(user2)
-    expect(Relationship.find_by(follower_id: user1.id)).to eq(nil)
+    @user1.follow(@user2)
+    expect(Relationship.find_by(follower_id: @user1.id).following_id).to eq(@user2.id)
+    @user1.unfollow(@user2)
+    expect(Relationship.find_by(follower_id: @user1.id)).to eq(nil)
   end
 
   it 'returns true when the user is following the target user' do
-    user1 = User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
-    user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-    user1.follow(user2)
-    expect(user1.following?(user2)).to eq(true)
+    @user1.follow(@user2)
+    expect(@user1.following?(@user2)).to eq(true)
   end
 
   it 'returns false when the user is not following the target user' do
-    user1 = User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
-    user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-    expect(user1.following?(user2)).to eq(false)
+    expect(@user1.following?(@user2)).to eq(false)
   end
 
   it 'returns true when the user is followed by the target user' do
-    user1 = User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
-    user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-    user2.follow(user1)
-    expect(user1.followed_by?(user2)).to eq(true)
+    @user2.follow(@user1)
+    expect(@user1.followed_by?(@user2)).to eq(true)
   end
 
   it 'returns false when the user is not following the target user' do
-    user1 = User.create(
-      email: "hoge@example.com",
-      password: "password"
-    )
-    user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-    expect(user1.followed_by?(user2)).to eq(false)
+    expect(@user1.followed_by?(@user2)).to eq(false)
   end
 end
