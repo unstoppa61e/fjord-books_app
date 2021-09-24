@@ -6,5 +6,10 @@ FactoryBot.define do
     address { 'address' }
     self_introduction { 'self introduction' }
     password { 'password' }
+
+    trait :with_reports do
+      after(:create) { |user| create_list(:report, 5, user: user) }
+    end
   end
 end
+

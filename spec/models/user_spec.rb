@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it 'is valid with an email address and a password' do
-    user = FactoryBot.build(:user)
+    user = FactoryBot.build_stubbed(:user)
     expect(user).to be_valid
   end
 
@@ -66,5 +66,10 @@ RSpec.describe User, type: :model do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
     expect(user1.followed_by?(user2)).to eq(false)
+  end
+
+  it 'can have many reports' do
+    user = FactoryBot.create(:user, :with_reports)
+    expect(user.reports.length).to eq 5
   end
 end

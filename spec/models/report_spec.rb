@@ -14,18 +14,18 @@ RSpec.describe Report, type: :model do
   end
 
   it 'is valid with a title and a content' do
-    report = FactoryBot.build(:report)
+    report = FactoryBot.build_stubbed(:report)
     expect(report).to be_valid
   end
 
   it 'is invalid without a title' do
-    report = FactoryBot.build(:report, title: nil)
+    report = FactoryBot.build_stubbed(:report, title: nil)
     report.valid?
     expect(report.errors[:title]).to include(I18n.t('errors.messages.blank'))
   end
 
   it 'is invalid without a content' do
-    report = FactoryBot.build(:report, content: nil)
+    report = FactoryBot.build_stubbed(:report, content: nil)
     report.valid?
     expect(report.errors[:content]).to include(I18n.t('errors.messages.blank'))
   end
