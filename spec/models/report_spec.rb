@@ -1,11 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Report, type: :model do
-  it 'is valid with a title and a content' do
-    User.create(
-      email: 'hoge@example.com',
-      password: 'password'
+  before do
+    @user1 = User.create(
+      name: 'user1',
+      email: "hoge@example.com",
+      password: "password"
     )
+    @user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    @user1_report = @user1.reports.create(
+      title: 'title',
+      content: 'content'
+    )
+  end
+
+  it 'is valid with a title and a content' do
     report = Report.new(
       title: 'title',
       content: 'content',
@@ -27,43 +39,14 @@ RSpec.describe Report, type: :model do
   end
 
   it "is possible for the author of a report to edit it" do
-    user = User.create(
-      email: 'hoge@example.com',
-      password: 'password'
-    )
-    report = user.reports.create(
-      title: 'title',
-      content: 'content'
-    )
-    expect(report.editable?(user)).to eq(true)
+    expect(@user1_report.editable?(@user1)).to eq(true)
   end
 
   it "is impossible for a user edit an other user's report" do
-    user1 = User.create(
-      email: 'hoge@example.com',
-      password: 'password'
-    )
-    user2 = User.create(
-      email: 'fuga@example.com',
-      password: 'password'
-    )
-    report = user1.reports.create(
-      title: 'title',
-      content: 'content'
-    )
-    expect(report.editable?(user2)).to eq(false)
+    expect(@user1_report.editable?(@user2)).to eq(false)
   end
 
   it "returns a report's creation date" do
-    User.create(
-      email: 'hoge@example.com',
-      password: 'password'
-    )
-    report = Report.create(
-      title: 'title',
-      content: 'content',
-      user_id: 1
-    )
-    expect(report.created_on).to eq report.created_at.to_date
+    expect(@user1_report.created_on).to eq @user1_report.created_at.to_date
   end
 end
