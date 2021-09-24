@@ -3,70 +3,68 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before do
-    @user1 = User.create(
-      name: 'user1',
-      email: "hoge@example.com",
-      password: "password"
-    )
-    @user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-  end
-
   it 'is valid with an email address and a password' do
-    user = User.new(
-      email: "foo@example.com",
-      password: "password"
-    )
+    user = FactoryBot.build(:user)
     expect(user).to be_valid
   end
 
   it 'is invalid with a duplicate email address' do
-    user = User.new(
-      email: "hoge@example.com",
-      password: "password"
-    )
+    other_password = 'other@example.com'
+    FactoryBot.create(:user, email: other_password)
+    user = FactoryBot.build(:user, email: other_password)
     user.valid?
     expect(user.errors[:email]).to include(I18n.t('errors.messages.taken'))
   end
 
   it "returns name when the user has a name" do
-    expect(@user1.name_or_email).to eq(@user1.name)
+    user = FactoryBot.create(:user)
+    expect(user.name_or_email).to eq(user.name)
   end
 
   it "returns email address when the user doesn't have a name" do
-    expect(@user2.name_or_email).to eq(@user2.email)
+    user = FactoryBot.create(:user, name: nil)
+    expect(user.name_or_email).to eq(user.email)
   end
 
   it "creates an active relationship" do
-    @user1.follow(@user2)
-    expect(Relationship.find_by(follower_id: @user1.id).following_id).to eq(@user2.id)
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    user1.follow(user2)
+    expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
   end
 
   it "destroys an active relationship" do
-    @user1.follow(@user2)
-    expect(Relationship.find_by(follower_id: @user1.id).following_id).to eq(@user2.id)
-    @user1.unfollow(@user2)
-    expect(Relationship.find_by(follower_id: @user1.id)).to eq(nil)
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    user1.follow(user2)
+    expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
+    user1.unfollow(user2)
+    expect(Relationship.find_by(follower_id: user1.id)).to eq(nil)
   end
 
   it 'returns true when the user is following the target user' do
-    @user1.follow(@user2)
-    expect(@user1.following?(@user2)).to eq(true)
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    user1.follow(user2)
+    expect(user1.following?(user2)).to eq(true)
   end
 
   it 'returns false when the user is not following the target user' do
-    expect(@user1.following?(@user2)).to eq(false)
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    expect(user1.following?(user2)).to eq(false)
   end
 
   it 'returns true when the user is followed by the target user' do
-    @user2.follow(@user1)
-    expect(@user1.followed_by?(@user2)).to eq(true)
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    user2.follow(user1)
+    expect(user1.followed_by?(user2)).to eq(true)
   end
 
   it 'returns false when the user is not following the target user' do
-    expect(@user1.followed_by?(@user2)).to eq(false)
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    expect(user1.followed_by?(user2)).to eq(false)
   end
 end
