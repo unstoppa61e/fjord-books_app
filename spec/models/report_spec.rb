@@ -14,39 +14,35 @@ RSpec.describe Report, type: :model do
   end
 
   it 'is valid with a title and a content' do
-    report = Report.new(
-      title: 'title',
-      content: 'content',
-      user_id: 1
-    )
+    report = FactoryBot.build(:report)
     expect(report).to be_valid
   end
 
   it 'is invalid without a title' do
-    report = Report.new(title: nil)
+    report = FactoryBot.build(:report, title: nil)
     report.valid?
     expect(report.errors[:title]).to include(I18n.t('errors.messages.blank'))
   end
 
   it 'is invalid without a content' do
-    report = Report.new(content: nil)
+    report = FactoryBot.build(:report, content: nil)
     report.valid?
     expect(report.errors[:content]).to include(I18n.t('errors.messages.blank'))
   end
 
   it "is possible for the author of a report to edit it" do
-    expect(@user1_report.editable?(@user1)).to eq(true)
+    report = FactoryBot.create(:report)
+    expect(report.editable?(User.find(report.user_id))).to eq(true)
   end
 
   it "is impossible for a user edit an other user's report" do
-    user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
-    expect(@user1_report.editable?(user2)).to eq(false)
+    user = FactoryBot.create(:user)
+    report = FactoryBot.create(:report)
+    expect(report.editable?(user)).to eq(false)
   end
 
   it "returns a report's creation date" do
-    expect(@user1_report.created_on).to eq @user1_report.created_at.to_date
+    report = FactoryBot.create(:report)
+    expect(report.created_on).to eq report.created_at.to_date
   end
 end
