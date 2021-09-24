@@ -7,10 +7,6 @@ RSpec.describe Report, type: :model do
       email: "hoge@example.com",
       password: "password"
     )
-    @user2 = User.create(
-      email: "fuga@example.com",
-      password: "password"
-    )
     @user1_report = @user1.reports.create(
       title: 'title',
       content: 'content'
@@ -43,7 +39,11 @@ RSpec.describe Report, type: :model do
   end
 
   it "is impossible for a user edit an other user's report" do
-    expect(@user1_report.editable?(@user2)).to eq(false)
+    user2 = User.create(
+      email: "fuga@example.com",
+      password: "password"
+    )
+    expect(@user1_report.editable?(user2)).to eq(false)
   end
 
   it "returns a report's creation date" do
