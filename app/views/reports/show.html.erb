@@ -7,6 +7,7 @@
   <strong><%= t('activerecord.attributes.report.content') %></strong>
   <%= @report.content %>
 </p>
+<br>
 
 <%= render partial: 'comments/comments', locals: {commentable: @report} %>
 <%= render partial: 'comments/form', locals: {commentable: @report} %>
