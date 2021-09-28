@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   it 'is valid with an email address and a password' do
     user = FactoryBot.build_stubbed(:user)
     expect(user).to be_valid
@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
     expect(user.errors[:email]).to include(I18n.t('errors.messages.taken'))
   end
 
-  it "returns name when the user has a name" do
+  it 'returns name when the user has a name' do
     user = FactoryBot.create(:user)
     expect(user.name_or_email).to eq(user.name)
   end
@@ -26,14 +26,14 @@ RSpec.describe User, type: :model do
     expect(user.name_or_email).to eq(user.email)
   end
 
-  it "creates an active relationship" do
+  it 'creates an active relationship' do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
     user1.follow(user2)
     expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
   end
 
-  it "destroys an active relationship" do
+  it 'destroys an active relationship' do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
     user1.follow(user2)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     name { 'user' }
@@ -12,4 +14,3 @@ FactoryBot.define do
     end
   end
 end
-

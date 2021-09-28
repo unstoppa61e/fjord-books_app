@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Report, type: :model do
+RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
   before do
     @user1 = User.create(
       name: 'user1',
-      email: "hoge@example.com",
-      password: "password"
+      email: 'hoge@example.com',
+      password: 'password'
     )
     @user1_report = @user1.reports.create(
       title: 'title',
@@ -30,7 +32,7 @@ RSpec.describe Report, type: :model do
     expect(report.errors[:content]).to include(I18n.t('errors.messages.blank'))
   end
 
-  it "is possible for the author of a report to edit it" do
+  it 'is possible for the author of a report to edit it' do
     report = FactoryBot.create(:report)
     expect(report.editable?(User.find(report.user_id))).to eq(true)
   end

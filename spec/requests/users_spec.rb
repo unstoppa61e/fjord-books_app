@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :request do
+RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
   describe '#index' do
     context 'as an authenticated user' do
       before do
