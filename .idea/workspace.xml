@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b501c528-392d-46b7-a19b-f3ab6f7827c2" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/comments_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/comments_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/reports_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/reports_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/locales/ja.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/ja.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/controllers/comments_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/comments_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/controllers/reports_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/controllers/reports_controller_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20210914233146_create_comments.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20210914233146_create_comments.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +145,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1632781437855</updated>
-      <workItem from="1632781440392" duration="9059000" />
+      <workItem from="1632781440392" duration="9748000" />
     </task>
     <servers />
   </component>
