@@ -7,12 +7,24 @@ RSpec.describe "Reports", type: :request do
         @user = FactoryBot.create(:user)
       end
 
-      it 'adds a report' do
-        report_params = FactoryBot.attributes_for(:report)
-        sign_in @user
-        expect {
-          post reports_path, params: { report: report_params }
-        }.to change(@user.reports, :count).by(1)
+      context 'with valid attributes' do
+        it 'adds a report' do
+          report_params = FactoryBot.attributes_for(:report)
+          sign_in @user
+          expect {
+            post reports_path, params: { report: report_params }
+          }.to change(@user.reports, :count).by(1)
+        end
+      end
+
+      context 'with invalid attributes' do
+        it "doesn't add a report" do
+          report_params = FactoryBot.attributes_for(:report, :invalid)
+          sign_in @user
+          expect {
+            post reports_path, params: { report: report_params }
+          }.to_not change(@user.reports, :count)
+        end
       end
     end
 
