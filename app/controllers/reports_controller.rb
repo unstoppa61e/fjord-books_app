@@ -43,7 +43,8 @@ class ReportsController < ApplicationController
   private
 
   def set_report
-    @report = current_user.reports.find(params[:id])
+    @report = current_user.reports.find_by(id: params[:id])
+    redirect_back fallback_location: root_path if @report.nil?
   end
 
   def report_params

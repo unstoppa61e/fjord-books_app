@@ -50,19 +50,28 @@ RSpec.describe "Reports", type: :request do
         @old_title = 'old title'
         @old_content = 'old content'
         @other_user_report = FactoryBot.create(:report, user: other_user, title: @old_title, content: @old_content)
-      end
-
-      it 'updates a report' do
         title = 'New Title'
         content = 'New Content'
-        report_params = FactoryBot.attributes_for(:report, title: title, content: content)
+        @report_params = FactoryBot.attributes_for(:report, title: title, content: content)
+      end
+
+      it "doesn't update a report's title" do
         sign_in @user
-        # ここが通らないからキャッチしたい
-        patch report_path(@other_user_report), params: { report: report_params }
-        expect(@report.reload.title).to eq @old_title
-        expect(@report.reload.content).to eq @old_content
+        patch report_path(@other_user_report), params: { report: @report_params }
+        expect(@other_user_report.reload.title).to eq @old_title
+      end
+
+      it "doesn't update a report's content" do
+        sign_in @user
+        patch report_path(@other_user_report), params: { report: @report_params }
+        expect(@other_user_report.reload.content).to eq @old_content
+      end
+
+      it "redirects to root_path" do
+        sign_in @user
+        patch report_path(@other_user_report), params: { report: @report_params }
+        assert_redirected_to root_path
       end
     end
   end
-  # 他のユーザーのは編集できてはならない
 end
