@@ -99,8 +99,12 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Report.count' do
       delete report_url(@other_user_report)
     end
+  end
 
-    assert_redirected_to root_url
+  test 'should return 401 when trying to delete other user report' do
+    login_as(@user)
+    delete report_url(@other_user_report)
+    assert_response :forbidden
   end
 
   test 'should destroy dependent comment' do

@@ -52,6 +52,6 @@ class ReportsController < ApplicationController
     @report = current_user.reports.find_by(id: params[:id])
     return unless @report.nil?
 
-    redirect_to root_url
+    render status: :forbidden, json: { status: :forbidden, message: t('errors.messages.forbidden') }
   end
 end

@@ -42,6 +42,16 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Comment.count' do
       delete report_comment_path(id: @other_user_comment.id, report_id: @other_user_comment.commentable_id)
     end
-    assert_redirected_to root_url
+  end
+
+  test 'returns 401 when trying to destroy other user comment' do
+    login_as(@user)
+    delete report_comment_path(id: @other_user_comment.id, report_id: @other_user_comment.commentable_id)
+    assert_response :forbidden
+  end
+
+  test 'redirects to new user session path when trying to destroy a comment without logging in' do
+    delete report_comment_path(id: @other_user_comment.id, report_id: @other_user_comment.commentable_id)
+    assert_redirected_to new_user_session_path
   end
 end

@@ -44,6 +44,6 @@ class CommentsController < ApplicationController
   def correct_user
     return if @comment.user_id == current_user.id
 
-    redirect_to root_url
+    render status: :forbidden, json: { status: :forbidden, message: t('errors.messages.forbidden') }
   end
 end
