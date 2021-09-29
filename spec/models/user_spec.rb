@@ -7,7 +7,8 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   let(:user2) { FactoryBot.create(:user) }
 
   it 'is valid with an email address and a password' do
-    expect(user1).to be_valid
+    user = FactoryBot.build_stubbed(:user)
+    expect(user).to be_valid
   end
 
   it 'is invalid with a duplicate email address' do
