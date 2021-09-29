@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
-  let(:report) { FactoryBot.create(:report) }
+  include_context 'setup'
 
   it 'is valid with a title and a content' do
     @report = FactoryBot.build_stubbed(:report)

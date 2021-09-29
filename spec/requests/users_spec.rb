@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
-  let(:user) { FactoryBot.create(:user) }
+  include_context 'setup'
 
   describe '#index' do
     context 'as an authenticated user' do
