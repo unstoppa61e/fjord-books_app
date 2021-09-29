@@ -139,11 +139,9 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
     context 'as a guest' do
       before do
-        # @user = FactoryBot.create(:user)
-        other_user = FactoryBot.create(:user)
         @old_title = 'old title'
         @old_content = 'old content'
-        @other_user_report = FactoryBot.create(:report, user: other_user, title: @old_title, content: @old_content)
+        @other_user_report = FactoryBot.create(:report, title: @old_title, content: @old_content)
         title = 'New Title'
         content = 'New Content'
         @report_params = FactoryBot.attributes_for(:report, title: title, content: content)
@@ -189,8 +187,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
     context 'as an unauthorized user' do
       before do
-        other_user = FactoryBot.create(:user)
-        @report = FactoryBot.create(:report, user: other_user)
+        @report = FactoryBot.create(:report)
       end
 
       it "doesn't delete a report" do
@@ -210,7 +207,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
     context 'as a guest' do
       before do
-        @report = FactoryBot.create(:report, user: user)
+        @report = FactoryBot.create(:report)
       end
 
       it "doesn't delete a report" do
@@ -218,12 +215,12 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       end
 
       it 'returns a 302 response' do
-        delete report_path(report)
+        delete report_path(@report)
         expect(response).to have_http_status '302'
       end
 
       it 'redirects to new user session path' do
-        delete report_path(report)
+        delete report_path(@report)
         expect(response).to redirect_to new_user_session_path
       end
     end

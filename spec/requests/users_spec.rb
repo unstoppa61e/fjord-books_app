@@ -3,20 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
+  let(:user) { FactoryBot.create(:user) }
+
   describe '#index' do
     context 'as an authenticated user' do
-      before do
-        @user = FactoryBot.create(:user)
-      end
-
       it 'responds successfully' do
-        sign_in @user
+        sign_in user
         get users_path
         expect(response).to be_successful
       end
 
       it 'returns a 200 response' do
-        sign_in @user
+        sign_in user
         get users_path
         expect(response).to have_http_status '200'
       end
@@ -37,19 +35,15 @@ RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
 
   describe '#show' do
     context 'as an authenticated user' do
-      before do
-        @user = FactoryBot.create(:user)
-      end
-
       it 'responds successfully' do
-        sign_in @user
-        get user_path(@user)
+        sign_in user
+        get user_path(user)
         expect(response).to be_successful
       end
 
       it 'returns a 200 response' do
-        sign_in @user
-        get user_path(@user)
+        sign_in user
+        get user_path(user)
         expect(response).to have_http_status '200'
       end
     end
