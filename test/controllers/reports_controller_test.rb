@@ -107,6 +107,12 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
   end
 
+  test 'should show error message when trying to delete other user report' do
+    login_as(@user)
+    delete report_url(@other_user_report)
+    assert_match I18n.t('errors.messages.forbidden'), response.body
+  end
+
   test 'should destroy dependent comment' do
     login_as(@user)
     assert_difference('Comment.count', -1) do

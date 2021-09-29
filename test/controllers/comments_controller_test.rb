@@ -50,6 +50,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
   end
 
+  test 'should show error message when trying to destroy other user comment' do
+    login_as(@user)
+    delete report_comment_path(id: @other_user_comment.id, report_id: @other_user_comment.commentable_id)
+    assert_match I18n.t('errors.messages.forbidden'), response.body
+  end
+
   test 'redirects to new user session path when trying to destroy a comment without logging in' do
     delete report_comment_path(id: @other_user_comment.id, report_id: @other_user_comment.commentable_id)
     assert_redirected_to new_user_session_path

@@ -44,6 +44,6 @@ class CommentsController < ApplicationController
   def correct_user
     return if @comment.user_id == current_user.id
 
-    render status: :forbidden, json: { status: :forbidden, message: t('errors.messages.forbidden') }
+    render status: :forbidden, plain: t('errors.messages.forbidden')
   end
 end
