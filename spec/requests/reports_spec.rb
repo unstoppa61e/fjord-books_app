@@ -110,7 +110,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   end
 
   describe '#update' do # rubocop:disable Metrics/BlockLength
-    context 'as an authenticated user' do # rubocop:disable Metrics/BlockLength
+    context 'as an authenticated user' do
       context 'with valid attributes' do
         it 'updates a report' do
           title = 'New Title'

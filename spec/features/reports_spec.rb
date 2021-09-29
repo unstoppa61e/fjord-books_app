@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature "Reports", type: :feature do
+RSpec.feature 'Reports', type: :feature do
   include_context 'setup'
 
   scenario 'user creates a new report' do
     sign_in user
     visit root_path
     click_link Report.model_name.human
-    expect {
+    expect do
       title = 'title'
       content = 'content'
       click_link I18n.t('views.common.new')
@@ -23,6 +25,6 @@ RSpec.feature "Reports", type: :feature do
       expect(page).to have_link user.name, href: user_path(user)
       expect(page).to have_content "#{Report.human_attribute_name(:created_on)}: #{I18n.l(Report.last.created_on)}"
       expect(page).to have_content "#{Comment.model_name.human}: （コメントがありません）"
-    }.to change(user.reports, :count).by(1)
+    end.to change(user.reports, :count).by(1)
   end
 end

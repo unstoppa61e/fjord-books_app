@@ -10,25 +10,20 @@ RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
       it 'responds successfully' do
         sign_in user
         get users_path
-        expect(response).to be_successful
-      end
-
-      it 'returns a 200 response' do
-        sign_in user
-        get users_path
-        expect(response).to have_http_status '200'
+        aggregate_failures do
+          expect(response).to be_successful
+          expect(response).to have_http_status '200'
+        end
       end
     end
 
     context 'as a guest' do
-      it 'returns a 302 response' do
+      it 'redirects to the sign-in page returning 302' do
         get users_path
-        expect(response).to have_http_status '302'
-      end
-
-      it 'redirects to the sign-in page' do
-        get users_path
-        expect(response).to redirect_to new_user_session_path
+        aggregate_failures do
+          expect(response).to have_http_status '302'
+          expect(response).to redirect_to new_user_session_path
+        end
       end
     end
   end
@@ -38,13 +33,20 @@ RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
       it 'responds successfully' do
         sign_in user
         get user_path(user)
-        expect(response).to be_successful
+        aggregate_failures do
+          expect(response).to be_successful
+          expect(response).to have_http_status '200'
+        end
       end
 
-      it 'returns a 200 response' do
-        sign_in user
-        get user_path(user)
-        expect(response).to have_http_status '200'
+      context 'as a guest' do
+        it 'redirects to the sign-in page returning 302' do
+          get user_path(user)
+          aggregate_failures do
+            expect(response).to have_http_status '302'
+            expect(response).to redirect_to new_user_session_path
+          end
+        end
       end
     end
   end
