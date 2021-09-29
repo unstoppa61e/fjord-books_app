@@ -3,13 +3,9 @@ require 'rails_helper'
 RSpec.feature "Reports", type: :feature do
   scenario 'user creates a new report' do
     user = FactoryBot.create(:user)
-
-    visit new_user_session_path
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    find('input[type=submit]').click
+    sign_in user
+    visit root_path
     click_link Report.model_name.human
-
     expect {
       title = 'title'
       content = 'content'
