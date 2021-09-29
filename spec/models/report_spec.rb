@@ -3,18 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
-  before do
-    @user1 = User.create(
-      name: 'user1',
-      email: 'hoge@example.com',
-      password: 'password'
-    )
-    @user1_report = @user1.reports.create(
-      title: 'title',
-      content: 'content'
-    )
-  end
-
   it 'is valid with a title and a content' do
     report = FactoryBot.build_stubbed(:report)
     expect(report).to be_valid
