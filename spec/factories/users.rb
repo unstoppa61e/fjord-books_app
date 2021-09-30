@@ -8,9 +8,5 @@ FactoryBot.define do
     sequence(:address) { |i| "address#{i}" }
     sequence(:self_introduction) { |i| "self introduction#{i}" }
     sequence(:password) { |i| "password#{i}" }
-
-    trait :with_reports do
-      after(:create) { |user| create_list(:report, 5, user: user) }
-    end
   end
 end

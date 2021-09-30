@@ -88,9 +88,6 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   end
 
   describe 'reports number' do
-    it 'can have many reports' do
-      user = FactoryBot.create(:user, :with_reports)
-      expect(user.reports.length).to eq 5
-    end
+    it { is_expected.to have_many :reports }
   end
 end
