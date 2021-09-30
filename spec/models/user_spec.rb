@@ -6,17 +6,39 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   include_context 'setup'
   let(:user2) { FactoryBot.create(:user) }
 
-  it 'is valid with an email address and a password' do
-    user3 = FactoryBot.build_stubbed(:user)
-    expect(user3).to be_valid
-  end
+  describe 'user validity' do
+    context 'with an email address and a password' do
+      it 'is valid' do
+        user = FactoryBot.build_stubbed(:user)
+        expect(user).to be_valid
+      end
+    end
 
-  it 'is invalid with a duplicate email address' do
-    email = 'email@example.com'
-    FactoryBot.create(:user, email: email)
-    user3 = FactoryBot.build(:user, email: email)
-    user3.valid?
-    expect(user3.errors[:email]).to include(I18n.t('errors.messages.taken'))
+    context 'without an email address' do
+      it 'is invalid' do
+        user = FactoryBot.build_stubbed(:user, email: nil)
+        user.valid?
+        expect(user.errors[:email]).to include(I18n.t('errors.messages.blank'))
+      end
+    end
+
+    context 'without a password' do
+      it 'is invalid' do
+        user = FactoryBot.build_stubbed(:user, password: nil)
+        user.valid?
+        expect(user.errors).to include(I18n.t('errors.messages.blank'))
+      end
+    end
+
+    context 'with a duplicate email address' do
+      it 'is invalid' do
+        email = 'email@example.com'
+        FactoryBot.create(:user, email: email)
+        user = FactoryBot.build(:user, email: email)
+        user.valid?
+        expect(user.errors[:email]).to include(I18n.t('errors.messages.taken'))
+      end
+    end
   end
 
   it 'returns name when the user has a name' do

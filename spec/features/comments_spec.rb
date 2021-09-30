@@ -14,10 +14,8 @@ RSpec.feature 'Comments', type: :feature do
       find('input[type=submit]').click
     end.to change(report.comments, :count).by(1)
 
-    aggregate_failures do
-      expect(page).to have_content content
-      expect(page).to have_link report.user.name, href: user_path(report.user)
-      expect(page).to have_content I18n.l(report.comments.last.created_at, format: :short)
-    end
+    expect(page).to have_content content
+    expect(page).to have_link report.user.name, href: user_path(report.user)
+    expect(page).to have_content I18n.l(report.comments.last.created_at, format: :short)
   end
 end

@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :report do
-    title { 'title' }
-    content { 'content' }
+    sequence(:title) { |i| "title#{i}" }
+    sequence(:content) { |i| "content#{i}" }
     association :user
 
     trait :invalid do
