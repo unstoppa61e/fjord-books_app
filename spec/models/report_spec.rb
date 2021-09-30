@@ -38,4 +38,8 @@ RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
       expect(report.created_on).to eq report.created_at.to_date
     end
   end
+
+  describe 'belonging to user' do
+    it { is_expected.to belong_to :user }
+  end
 end
