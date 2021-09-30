@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Reports', type: :feature do
-  scenario 'user creates a new report' do
+RSpec.describe 'Reports', type: :system do
+  it 'creates a new report' do
     user = FactoryBot.create(:user)
     sign_in user
     visit root_path
