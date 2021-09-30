@@ -3,9 +3,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Reports', type: :feature do
-  include_context 'setup'
-
   scenario 'user creates a new report' do
+    user = FactoryBot.create(:user)
     sign_in user
     visit root_path
     click_link Report.model_name.human
