@@ -3,9 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
-  include_context 'setup'
-  let(:user2) { FactoryBot.create(:user) }
-
   describe 'user validity' do
     context 'with an email address and a password' do
       it 'is valid' do
@@ -22,14 +19,6 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
       end
     end
 
-    context 'without a password' do
-      it 'is invalid' do
-        user = FactoryBot.build_stubbed(:user, password: nil)
-        user.valid?
-        expect(user.errors).to include(I18n.t('errors.messages.blank'))
-      end
-    end
-
     context 'with a duplicate email address' do
       it 'is invalid' do
         email = 'email@example.com'
@@ -41,47 +30,82 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  it 'returns name when the user has a name' do
-    expect(user.name_or_email).to eq(user.name)
+  describe '#name_or_email' do
+    context 'the user has a name' do
+      it 'returns name' do
+        user = FactoryBot.create(:user)
+        expect(user.name_or_email).to eq(user.name)
+      end
+    end
+
+    context 'the user does not have a name' do
+      it 'returns email address' do
+        user_no_name = FactoryBot.create(:user, name: nil)
+        expect(user_no_name.name_or_email).to eq(user_no_name.email)
+      end
+    end
   end
 
-  it "returns email address when the user doesn't have a name" do
-    user_no_name = FactoryBot.create(:user, name: nil)
-    expect(user_no_name.name_or_email).to eq(user_no_name.email)
+  describe '#follow' do
+    it 'creates an active relationship' do
+      user1 = FactoryBot.create(:user)
+      user2 = FactoryBot.create(:user)
+      user1.follow(user2)
+      expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
+    end
   end
 
-  it 'creates an active relationship' do
-    user.follow(user2)
-    expect(Relationship.find_by(follower_id: user.id).following_id).to eq(user2.id)
+  describe '#unfollow' do
+    it 'destroys an active relationship' do
+      user1 = FactoryBot.create(:user)
+      user2 = FactoryBot.create(:user)
+      user1.follow(user2)
+      expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
+      user1.unfollow(user2)
+      expect(Relationship.find_by(follower_id: user1.id)).to eq(nil)
+    end
   end
 
-  it 'destroys an active relationship' do
-    user.follow(user2)
-    expect(Relationship.find_by(follower_id: user.id).following_id).to eq(user2.id)
-    user.unfollow(user2)
-    expect(Relationship.find_by(follower_id: user.id)).to eq(nil)
+  describe '#following?' do
+    let!(:user1) { FactoryBot.create(:user) }
+    let!(:user2) { FactoryBot.create(:user) }
+
+    context 'the user is following the target user' do
+      it 'returns true' do
+        user1.follow(user2)
+        expect(user1.following?(user2)).to eq(true)
+      end
+    end
+
+    context 'the user is not following the target user' do
+      it 'returns false' do
+        expect(user1.following?(user2)).to eq(false)
+      end
+    end
   end
 
-  it 'returns true when the user is following the target user' do
-    user.follow(user2)
-    expect(user.following?(user2)).to eq(true)
+  describe '#followed_by?' do
+    let!(:user1) { FactoryBot.create(:user) }
+    let!(:user2) { FactoryBot.create(:user) }
+
+    context 'the user is followed by the target user' do
+      it 'returns true' do
+        user1.follow(user2)
+        expect(user2.followed_by?(user1)).to eq(true)
+      end
+    end
+
+    context 'the user is not followed by the target user' do
+      it 'returns false' do
+        expect(user2.followed_by?(user1)).to eq(false)
+      end
+    end
   end
 
-  it 'returns false when the user is not following the target user' do
-    expect(user.following?(user2)).to eq(false)
-  end
-
-  it 'returns true when the user is followed by the target user' do
-    user2.follow(user)
-    expect(user.followed_by?(user2)).to eq(true)
-  end
-
-  it 'returns false when the user is not following the target user' do
-    expect(user.followed_by?(user2)).to eq(false)
-  end
-
-  it 'can have many reports' do
-    user3 = FactoryBot.create(:user, :with_reports)
-    expect(user3.reports.length).to eq 5
+  describe 'reports number' do
+    it 'can have many reports' do
+      user = FactoryBot.create(:user, :with_reports)
+      expect(user.reports.length).to eq 5
+    end
   end
 end
