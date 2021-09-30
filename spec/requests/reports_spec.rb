@@ -111,7 +111,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   describe '#update' do # rubocop:disable Metrics/BlockLength
     let(:report) { FactoryBot.create(:report) }
 
-    context 'as an authenticated user' do
+    context 'as an authenticated user' do # rubocop:disable Metrics/BlockLength
       context 'with valid attributes' do
         it 'updates a report' do
           title = 'New Title'

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Report, type: :model do
+RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
   describe 'report validity' do
     context 'with a title and a content' do
       it 'is valid' do
