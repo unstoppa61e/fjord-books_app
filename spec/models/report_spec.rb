@@ -11,21 +11,8 @@ RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
       end
     end
 
-    context 'without a title' do
-      it 'is invalid' do
-        report = FactoryBot.build_stubbed(:report, title: nil)
-        report.valid?
-        expect(report.errors[:title]).to include(I18n.t('errors.messages.blank'))
-      end
-    end
-
-    context 'without a content' do
-      it 'is invalid' do
-        report = FactoryBot.build_stubbed(:report, content: nil)
-        report.valid?
-        expect(report.errors[:content]).to include(I18n.t('errors.messages.blank'))
-      end
-    end
+    it { is_expected.to validate_presence_of :title }
+    it { is_expected.to validate_presence_of :content }
   end
 
   describe '#editable?' do

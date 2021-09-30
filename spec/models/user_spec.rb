@@ -11,23 +11,8 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
       end
     end
 
-    context 'without an email address' do
-      it 'is invalid' do
-        user = FactoryBot.build_stubbed(:user, email: nil)
-        user.valid?
-        expect(user.errors[:email]).to include(I18n.t('errors.messages.blank'))
-      end
-    end
-
-    context 'with a duplicate email address' do
-      it 'is invalid' do
-        email = 'email@example.com'
-        FactoryBot.create(:user, email: email)
-        user = FactoryBot.build(:user, email: email)
-        user.valid?
-        expect(user.errors[:email]).to include(I18n.t('errors.messages.taken'))
-      end
-    end
+    it { is_expected.to validate_presence_of :email }
+    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   end
 
   describe '#name_or_email' do
