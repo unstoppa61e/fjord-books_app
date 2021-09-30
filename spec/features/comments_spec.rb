@@ -3,9 +3,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Comments', type: :feature do
-  include_context 'setup'
-
   scenario 'user creates a comment for a report' do
+    report = FactoryBot.create(:report)
     sign_in report.user
     visit report_path(report)
     content = 'comment content'
