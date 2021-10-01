@@ -30,12 +30,12 @@ RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
         get user_path(user)
         expect_success(response)
       end
+    end
 
-      context 'as a guest' do
-        it 'redirects to the sign-in page returning 302' do
-          get user_path(user)
-          expect_redirection(response, new_user_session_path)
-        end
+    context 'as a guest' do
+      it 'redirects to the sign-in page returning 302' do
+        get user_path(user)
+        expect_redirection(response, new_user_session_path)
       end
     end
   end
