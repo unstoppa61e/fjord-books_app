@@ -34,10 +34,10 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       end
 
       context 'when the report corresponding to param does not exist' do
-        it 'redirects' do
+        it 'returns 404 not found' do
           sign_in report.user
           get report_path(id: Report.last.id + 1)
-          expect(response).to have_http_status 302
+          expect(response).to have_http_status :not_found
         end
       end
     end
@@ -176,11 +176,11 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
         expect(report.reload.content).to eq old_content
       end
 
-      it 'redirects to root_path returning 302' do
+      it 'returns 404 not found' do
         sign_in user
         report = FactoryBot.create(:report)
         patch report_path(report), params: { report: report_params }
-        expect_redirection(response, root_path)
+        expect(response).to have_http_status :not_found
       end
     end
   end
@@ -209,10 +209,10 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
         expect { delete report_path(report) }.to_not change(user.reports, :count)
       end
 
-      it 'redirects to new user session path returning 302' do
+      it 'returns 404 not found' do
         sign_in user
         delete report_path(report)
-        expect_redirection(response, root_path)
+        expect(response).to have_http_status :not_found
       end
     end
 

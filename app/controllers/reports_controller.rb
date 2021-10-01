@@ -9,7 +9,9 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find_by(id: params[:id])
-    redirect_back fallback_location: root_path if @report.nil?
+    return unless @report.nil?
+
+    render status: :not_found, plain: t('errors.messages.not_found')
   end
 
   def new
@@ -45,7 +47,9 @@ class ReportsController < ApplicationController
 
   def set_report
     @report = current_user.reports.find_by(id: params[:id])
-    redirect_back fallback_location: root_path if @report.nil?
+    return unless @report.nil?
+
+    render status: :not_found, plain: t('errors.messages.not_found')
   end
 
   def report_params
