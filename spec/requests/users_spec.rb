@@ -42,11 +42,11 @@ RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
 
   def expect_success(response)
     expect(response).to be_successful
-    expect(response).to have_http_status '200'
+    expect(response).to have_http_status 200
   end
 
   def expect_redirection(response, path)
     expect(response).to redirect_to path
-    expect(response).to have_http_status '302'
+    expect(response).to have_http_status 302
   end
 end

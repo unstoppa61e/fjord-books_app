@@ -8,7 +8,8 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @report = Report.find(params[:id])
+    @report = Report.find_by(id: params[:id])
+    redirect_back fallback_location: root_path if @report.nil?
   end
 
   def new

@@ -25,10 +25,20 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
     let!(:report) { FactoryBot.create(:report) }
 
     context 'as an authenticated user' do
-      it 'responds successfully' do
-        sign_in report.user
-        get report_path(report)
-        expect_success(response)
+      context 'when the report corresponding to param exists' do
+        it 'responds successfully' do
+          sign_in report.user
+          get report_path(report)
+          expect_success(response)
+        end
+      end
+
+      context 'when the report corresponding to param does not exist' do
+        it 'redirects' do
+          sign_in report.user
+          get report_path(id: Report.last.id + 1)
+          expect(response).to have_http_status 302
+        end
       end
     end
 
@@ -187,8 +197,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       it 'redirects to reports_url returning 302' do
         sign_in report.user
         delete report_path(report)
-        expect(response).to redirect_to reports_url
-        expect(response).to have_http_status '302'
+        expect_redirection(response, reports_url)
       end
     end
 
@@ -221,11 +230,11 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
   def expect_success(response)
     expect(response).to be_successful
-    expect(response).to have_http_status '200'
+    expect(response).to have_http_status 200
   end
 
   def expect_redirection(response, path)
     expect(response).to redirect_to path
-    expect(response).to have_http_status '302'
+    expect(response).to have_http_status 302
   end
 end
