@@ -26,7 +26,6 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
     context 'as an authenticated user' do
       it 'responds successfully' do
-        # user = FactoryBot.create(:user)
         sign_in report.user
         get report_path(report)
         expect_success(response)
