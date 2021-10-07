@@ -13,7 +13,7 @@ RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
 
     context 'for the author of a report' do
       it 'is editable' do
-        expect(report.editable?(User.find(report.user_id))).to eq(true)
+        expect(report.editable?(report.user)).to eq(true)
       end
     end
 
