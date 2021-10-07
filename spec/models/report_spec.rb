@@ -4,13 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Report, type: :model do # rubocop:disable Metrics/BlockLength
   describe 'report validity' do
-    context 'with a title and a content' do
-      it 'is valid' do
-        report = build_stubbed(:report)
-        expect(report).to be_valid
-      end
-    end
-
     it { is_expected.to validate_presence_of :title }
     it { is_expected.to validate_presence_of :content }
   end
