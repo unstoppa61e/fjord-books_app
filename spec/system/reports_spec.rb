@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Reports', type: :system do
   it 'creates a new report' do
     user = create(:user)
-    sign_in user
+    sign_in_as user
     visit root_path
     click_link Report.model_name.human
     click_link I18n.t('views.common.new')
