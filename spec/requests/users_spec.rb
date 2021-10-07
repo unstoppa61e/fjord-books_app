@@ -6,7 +6,7 @@ RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
   describe '#index' do
     context 'as an authenticated user' do
       it 'responds successfully' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         sign_in user
         get users_path
         expect_success(response)
@@ -22,7 +22,7 @@ RSpec.describe 'Users', type: :request do # rubocop:disable Metrics/BlockLength
   end
 
   describe '#show' do
-    let!(:user) { FactoryBot.create(:user) }
+    let!(:user) { create(:user) }
 
     context 'as an authenticated user' do
       it 'responds successfully' do

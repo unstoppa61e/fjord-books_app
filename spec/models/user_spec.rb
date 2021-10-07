@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   describe 'user validity' do
     context 'with an email address and a password' do
       it 'is valid' do
-        user = FactoryBot.build_stubbed(:user)
+        user = build_stubbed(:user)
         expect(user).to be_valid
       end
     end
@@ -18,14 +18,14 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   describe '#name_or_email' do
     context 'the user has a name' do
       it 'returns name' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         expect(user.name_or_email).to eq(user.name)
       end
     end
 
     context 'the user does not have a name' do
       it 'returns email address' do
-        user_no_name = FactoryBot.create(:user, name: nil)
+        user_no_name = create(:user, name: nil)
         expect(user_no_name.name_or_email).to eq(user_no_name.email)
       end
     end
@@ -33,8 +33,8 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
 
   describe '#follow' do
     it 'creates an active relationship' do
-      user1 = FactoryBot.create(:user)
-      user2 = FactoryBot.create(:user)
+      user1 = create(:user)
+      user2 = create(:user)
       user1.follow(user2)
       expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
     end
@@ -42,8 +42,8 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
 
   describe '#unfollow' do
     it 'destroys an active relationship' do
-      user1 = FactoryBot.create(:user)
-      user2 = FactoryBot.create(:user)
+      user1 = create(:user)
+      user2 = create(:user)
       user1.follow(user2)
       expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
       user1.unfollow(user2)
@@ -52,8 +52,8 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   end
 
   describe '#following?' do
-    let!(:user1) { FactoryBot.create(:user) }
-    let!(:user2) { FactoryBot.create(:user) }
+    let!(:user1) { create(:user) }
+    let!(:user2) { create(:user) }
 
     context 'the user is following the target user' do
       it 'returns true' do
@@ -70,8 +70,8 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   end
 
   describe '#followed_by?' do
-    let!(:user1) { FactoryBot.create(:user) }
-    let!(:user2) { FactoryBot.create(:user) }
+    let!(:user1) { create(:user) }
+    let!(:user2) { create(:user) }
 
     context 'the user is followed by the target user' do
       it 'returns true' do

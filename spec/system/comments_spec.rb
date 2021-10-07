@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Comments', type: :system do
   it 'creates a comment for a report' do
-    report = FactoryBot.create(:report)
+    report = create(:report)
     sign_in report.user
     visit report_path(report)
     content = 'comment content'

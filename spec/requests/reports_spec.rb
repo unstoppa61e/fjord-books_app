@@ -6,7 +6,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   describe '#index' do
     context 'as an authenticated user' do
       it 'responds successfully' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         sign_in user
         get reports_path
         expect_success(response)
@@ -22,7 +22,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   end
 
   describe '#show' do
-    let!(:report) { FactoryBot.create(:report) }
+    let!(:report) { create(:report) }
 
     context 'as an authenticated user' do
       context 'when the report corresponding to param exists' do
@@ -53,7 +53,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   describe '#new' do
     context 'as an authenticated user' do
       it 'responds successfully' do
-        user = FactoryBot.create(:user)
+        user = create(:user)
         sign_in user
         get new_report_path
         expect_success(response)
@@ -69,7 +69,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   end
 
   describe '#edit' do
-    let!(:report) { FactoryBot.create(:report) }
+    let!(:report) { create(:report) }
 
     context 'as an authenticated user' do
       it 'responds successfully' do
@@ -89,12 +89,12 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
   describe '#create' do
     context 'as an authenticated user' do
-      let!(:user) { FactoryBot.create(:user) }
+      let!(:user) { create(:user) }
 
       context 'with valid attributes' do
         it 'adds a report' do
           sign_in user
-          report_params = FactoryBot.attributes_for(:report)
+          report_params = attributes_for(:report)
           expect { post reports_path, params: { report: report_params } }.to change(user.reports, :count).by(1)
         end
       end
@@ -102,7 +102,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       context 'with invalid attributes' do
         it "doesn't add a report" do
           sign_in user
-          report_params = FactoryBot.attributes_for(:report, :invalid)
+          report_params = attributes_for(:report, :invalid)
           expect { post reports_path, params: { report: report_params } }.to_not change(user.reports, :count)
         end
       end
@@ -110,7 +110,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
     context 'as a guest' do
       it 'redirects to new user session path returning 302' do
-        report_params = FactoryBot.attributes_for(:report)
+        report_params = attributes_for(:report)
         post reports_path, params: { report: report_params }
         expect_redirection(response, new_user_session_path)
       end
@@ -118,14 +118,14 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   end
 
   describe '#update' do # rubocop:disable Metrics/BlockLength
-    let(:report) { FactoryBot.create(:report) }
+    let(:report) { create(:report) }
 
     context 'as an authenticated user' do # rubocop:disable Metrics/BlockLength
       context 'with valid attributes' do
         it 'updates a report' do
           title = 'New Title'
           content = 'New Content'
-          report_params = FactoryBot.attributes_for(:report, title: title, content: content)
+          report_params = attributes_for(:report, title: title, content: content)
           sign_in report.user
           patch report_path(report), params: { report: report_params }
           expect(report.reload.title).to eq title
@@ -137,7 +137,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
         context 'without a title' do
           it "doesn't update the title" do
             old_title = report.title
-            report_params = FactoryBot.attributes_for(:report, title: '')
+            report_params = attributes_for(:report, title: '')
             sign_in report.user
             patch report_path(report), params: { report: report_params }
             expect(report.reload.title).to eq old_title
@@ -147,7 +147,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
         context 'without a content' do
           it "doesn't update the content" do
             old_content = report.content
-            report_params = FactoryBot.attributes_for(:report, content: '')
+            report_params = attributes_for(:report, content: '')
             sign_in report.user
             patch report_path(report), params: { report: report_params }
             expect(report.reload.content).to eq old_content
@@ -157,13 +157,13 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
     end
 
     context 'as an unauthenticated user' do
-      let(:user) { FactoryBot.create(:user) }
-      let(:report_params) { FactoryBot.attributes_for(:report) }
+      let(:user) { create(:user) }
+      let(:report_params) { attributes_for(:report) }
 
       it "doesn't update a report's title" do
         sign_in user
         old_title = 'old title'
-        report = FactoryBot.create(:report, title: old_title)
+        report = create(:report, title: old_title)
         patch report_path(report), params: { report: report_params }
         expect(report.reload.title).to eq old_title
       end
@@ -171,14 +171,14 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       it "doesn't update a report's content" do
         sign_in user
         old_content = 'old content'
-        report = FactoryBot.create(:report, content: old_content)
+        report = create(:report, content: old_content)
         patch report_path(report), params: { report: report_params }
         expect(report.reload.content).to eq old_content
       end
 
       it 'returns 404 not found' do
         sign_in user
-        report = FactoryBot.create(:report)
+        report = create(:report)
         patch report_path(report), params: { report: report_params }
         expect(response).to have_http_status :not_found
       end
@@ -186,7 +186,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
   end
 
   describe '#destroy' do # rubocop:disable Metrics/BlockLength
-    let!(:report) { FactoryBot.create(:report) }
+    let!(:report) { create(:report) }
 
     context 'as an authenticated user' do
       it 'deletes a report' do
@@ -202,7 +202,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
     end
 
     context 'as an unauthenticated user' do
-      let!(:user) { FactoryBot.create(:user) }
+      let!(:user) { create(:user) }
 
       it "doesn't delete a report" do
         sign_in user
