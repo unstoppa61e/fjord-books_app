@@ -9,14 +9,14 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
         user = create(:user)
         sign_in user
         get reports_path
-        expect_success(response)
+        expect(response).to be_successful
       end
     end
 
     context 'as a guest' do
       it 'redirects to new user session path returning 302' do
         get reports_path
-        expect_redirection(response, new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -29,7 +29,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
         it 'responds successfully' do
           sign_in report.user
           get report_path(report)
-          expect_success(response)
+          expect(response).to be_successful
         end
       end
 
@@ -45,7 +45,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
     context 'as a guest' do
       it 'redirects to new user session path' do
         get report_path(report)
-        expect_redirection(response, new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -56,14 +56,14 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
         user = create(:user)
         sign_in user
         get new_report_path
-        expect_success(response)
+        expect(response).to be_successful
       end
     end
 
     context 'as a guest' do
       it 'redirects to new user session path returning 302' do
         get new_report_path
-        expect_redirection(response, new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -75,14 +75,14 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       it 'responds successfully' do
         sign_in report.user
         get edit_report_path(report)
-        expect_success(response)
+        expect(response).to be_successful
       end
     end
 
     context 'as a guest' do
       it 'redirects to new user session path returning 302' do
         get edit_report_path(report)
-        expect_redirection(response, new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -112,7 +112,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       it 'redirects to new user session path returning 302' do
         report_params = attributes_for(:report)
         post reports_path, params: { report: report_params }
-        expect_redirection(response, new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -197,7 +197,7 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
       it 'redirects to reports_url returning 302' do
         sign_in report.user
         delete report_path(report)
-        expect_redirection(response, reports_url)
+        expect(response).to redirect_to reports_url
       end
     end
 
@@ -223,18 +223,8 @@ RSpec.describe 'Reports', type: :request do # rubocop:disable Metrics/BlockLengt
 
       it 'redirects to new user session path returning 302' do
         delete report_path(report)
-        expect_redirection(response, new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
-  end
-
-  def expect_success(response)
-    expect(response).to be_successful
-    expect(response).to have_http_status 200
-  end
-
-  def expect_redirection(response, path)
-    expect(response).to redirect_to path
-    expect(response).to have_http_status 302
   end
 end

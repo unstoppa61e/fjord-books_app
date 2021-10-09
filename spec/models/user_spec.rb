@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   describe '#name_or_email' do
     context 'the user has a name' do
       it 'returns name' do
-        user = create(:user)
+        user = create(:user, name: 'test')
         expect(user.name_or_email).to eq(user.name)
       end
     end
@@ -31,23 +31,15 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe '#follow' do
-    it 'creates an active relationship' do
+  describe '#follow and #unfollow' do
+    it 'creates and destroys an active relationship' do
       user1 = create(:user)
       user2 = create(:user)
+      expect(Relationship.exists?(follower: user1, following: user2)).to eq(false)
       user1.follow(user2)
-      expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
-    end
-  end
-
-  describe '#unfollow' do
-    it 'destroys an active relationship' do
-      user1 = create(:user)
-      user2 = create(:user)
-      user1.follow(user2)
-      expect(Relationship.find_by(follower_id: user1.id).following_id).to eq(user2.id)
+      expect(Relationship.exists?(follower: user1, following: user2)).to eq(true)
       user1.unfollow(user2)
-      expect(Relationship.find_by(follower_id: user1.id)).to eq(nil)
+      expect(Relationship.exists?(follower: user1, following: user2)).to eq(false)
     end
   end
 
