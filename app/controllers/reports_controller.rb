@@ -8,7 +8,10 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @report = Report.find(params[:id])
+    @report = Report.find_by(id: params[:id])
+    return unless @report.nil?
+
+    render status: :not_found, plain: t('errors.messages.not_found')
   end
 
   def new
@@ -43,7 +46,10 @@ class ReportsController < ApplicationController
   private
 
   def set_report
-    @report = current_user.reports.find(params[:id])
+    @report = current_user.reports.find_by(id: params[:id])
+    return unless @report.nil?
+
+    render status: :not_found, plain: t('errors.messages.not_found')
   end
 
   def report_params
