@@ -1,0 +1,17 @@
+<p>
+  <strong><%= t('activerecord.attributes.report.title') %>: </strong>
+  <%= @report.title %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.report.content') %></strong>
+  <div><%== h(@report.content).gsub(/\n/, '<br>') %></div>
+</p>
+
+<%= render partial: 'comments/comments', locals: {commentable: @report} %>
+<%= render partial: 'comments/form', locals: {commentable: @report} %>
+
+<% if current_user?(@report.user) %>
+  <%= link_to t('views.common.edit'), edit_report_path(@report) %> |
+<% end %>
+<%= link_to t('views.common.back'), reports_path %>

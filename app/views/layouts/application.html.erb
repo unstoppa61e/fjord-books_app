@@ -18,6 +18,9 @@
             <%= link_to Book.model_name.human, books_path %>
           </li>
           <li>
+            <%= link_to Report.model_name.human, reports_path %>
+          </li>
+          <li>
             <%= link_to User.model_name.human, users_path %>
           </li>
         </ul>
@@ -34,8 +37,7 @@
     <% end %>
     <% if notice.present? %>
       <p id="notice"><%= notice %></p>
-    <% end %>
-    <% if alert.present? %>
+    <% elsif alert.present? %>
       <p id="alert"><%= alert %></p>
     <% end %>
     <%= yield %>

@@ -116,6 +116,7 @@ ja:
       equal_to: は%{count}にしてください
       even: は偶数にしてください
       exclusion: は予約されています
+      forbidden: 許可されていません
       greater_than: は%{count}より大きい値にしてください
       greater_than_or_equal_to: は%{count}以上の値にしてください
       inclusion: は一覧にありません
@@ -204,6 +205,8 @@ ja:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
+      report: "%Y年%m月%d日"
+      comment: "%Y年%m月%d日(%a) %H:%M"
     pm: 午後
   views:
     common:
@@ -255,3 +258,11 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  reports:
+    index:
+      created_at: 作成日
+  comments:
+    comments:
+      no_comments: コメントはまだありません
+      deleted_user: 退会済みユーザー
+

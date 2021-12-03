@@ -1,0 +1,20 @@
+one:
+  commentable_type: Book
+  commentable_id: 1
+  user_id: 1
+  body: comment1
+  id: 1
+
+two:
+  commentable_type: Report
+  commentable_id: 3
+  user_id: 1
+  body: comment2
+  id: 2
+
+other_user_comment:
+  commentable_type: Report
+  commentable_id: 4
+  user_id: 2
+  body: other_user_report
+  id: 3

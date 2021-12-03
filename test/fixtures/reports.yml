@@ -1,0 +1,29 @@
+one:
+  title: <%= Faker::Lorem.word %>
+  content: <%= Faker::Lorem.sentence %>
+  user_id: 1
+  id: 1
+  created_at: <%= Time.zone.now - 1.day %>
+
+two:
+  title: <%= Faker::Lorem.word %>
+  content: <%= Faker::Lorem.sentence %>
+  user_id: 2
+  id: 2
+  created_at: <%= Time.zone.now - 2.days %>
+
+three:
+  title: <%= Faker::Lorem.word %>
+  content: <%= Faker::Lorem.sentence %>
+  user_id: 1
+  id: 3
+  created_at: <%= Time.zone.now - 3.days %>
+
+<% 20.times do |n| %>
+report<%= n %>:
+  title: <%= Faker::Lorem.word %>
+  content: <%= Faker::Lorem.sentence %>
+  user_id: <%= n % 5 + 1 %>
+  created_at: <%= Time.zone.now - (n + 3).days %>
+  id: <%= n + 4 %>
+<% end %>

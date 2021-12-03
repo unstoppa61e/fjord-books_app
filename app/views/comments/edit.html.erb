@@ -1,0 +1,25 @@
+<h1><%= t('views.common.title_edit', name: Comment.model_name.human) %></h1>
+
+<%= form_with(model: [@commentable, @comment], local: true) do |form| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_area :body, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to t('views.common.back'), @commentable %>

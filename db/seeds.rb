@@ -18,6 +18,37 @@ end
 
 puts '実行中です。しばらくお待ちください...' # rubocop:disable Rails/Output
 
+User.destroy_all
+
+User.transaction do
+  55.times do |n|
+    name = Faker::Name.name
+    User.create!(
+      email: "sample-#{n}@example.com",
+      password: 'password',
+      name: name,
+      postal_code: "123-#{n.to_s.rjust(4, '0')}",
+      address: Faker::Address.full_address,
+      self_introduction: "こんにちは、#{name}です。"
+    )
+  end
+end
+
+User.order(:id).each do |user|
+  image_url = Faker::Avatar.image(slug: user.email, size: '150x150')
+  user.avatar.attach(io: URI.parse(image_url).open, filename: 'avatar.png')
+end
+
+# User.destroy_all で全件削除されているはずだが念のため
+Relationship.destroy_all
+
+# 後輩が先輩を全員フォローする
+User.order(id: :desc).each do |user|
+  User.where('id < ?', user.id).each do |other|
+    user.follow(other)
+  end
+end
+
 Book.destroy_all
 
 Book.transaction do # rubocop:disable Metrics/BlockLength
@@ -52,34 +83,81 @@ Book.transaction do # rubocop:disable Metrics/BlockLength
   end
 end
 
-User.destroy_all
+Report.destroy_all
 
-User.transaction do
+Report.transaction do # rubocop:disable Metrics/BlockLength
+  Report.create!(
+    title: '１日目',
+    content: 'いい感じ',
+    user_id: 1,
+    created_at: Time.zone.now - 3.days
+  )
+
+  Report.create!(
+    title: '２日目',
+    content: '超々いいかんじ',
+    user_id: 1,
+    created_at: Time.zone.now - 2.days
+  )
+
+  Report.create!(
+    title: '３日目',
+    content: '超々々々いいカンジ',
+    user_id: 1,
+    created_at: Time.zone.now - 1.day
+  )
+
   55.times do |n|
-    name = Faker::Name.name
-    User.create!(
-      email: "sample-#{n}@example.com",
-      password: 'password',
-      name: name,
-      postal_code: "123-#{n.to_s.rjust(4, '0')}",
-      address: Faker::Address.full_address,
-      self_introduction: "こんにちは、#{name}です。"
+    Report.create!(
+      title: Faker::Lorem.word,
+      content: Faker::Lorem.sentence,
+      user_id: n % 5 + 1,
+      created_at: Time.zone.now - (n + 4).days
     )
   end
 end
 
-User.order(:id).each do |user|
-  image_url = Faker::Avatar.image(slug: user.email, size: '150x150')
-  user.avatar.attach(io: URI.parse(image_url).open, filename: 'avatar.png')
-end
+Comment.destroy_all
 
-# User.destroy_all で全件削除されているはずだが念のため
-Relationship.destroy_all
+Comment.transaction do # rubocop:disable Metrics/BlockLength
+  Comment.create!(
+    body: 'body1',
+    commentable: Book.first,
+    user_id: 1
+  )
 
-# 後輩が先輩を全員フォローする
-User.order(id: :desc).each do |user|
-  User.where('id < ?', user.id).each do |other|
-    user.follow(other)
+  Comment.create!(
+    body: 'body2',
+    commentable: Book.first,
+    user_id: 2
+  )
+
+  Comment.create!(
+    body: 'body3',
+    commentable: Report.first,
+    user_id: 1
+  )
+
+  Comment.create!(
+    body: 'body4',
+    commentable: Report.first,
+    user_id: 3
+  )
+
+  20.times do |n|
+    Comment.create!(
+      body: Faker::Lorem.sentence,
+      commentable: Book.all[n % 3],
+      user_id: n % 4 + 1
+    )
+  end
+
+  20.times do |n|
+    Comment.create!(
+      body: Faker::Lorem.sentence,
+      commentable: Report.all[n % 4],
+      user_id: n % 3 + 1
+    )
   end
 end
 
