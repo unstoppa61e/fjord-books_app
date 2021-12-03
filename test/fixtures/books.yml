@@ -1,9 +1,25 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+introduction:
+  title: Ruby超入門
+  memo: Rubyの文法の基本をやさしくていねいに解説しています。
+  author: 五十嵐 邦明
+  picture: /uploads/book/picture/1/cho-nyumon.jpg
 
-one:
-  title: MyString
-  memo: MyText
+cherry:
+  title: チェリー本
+  memo: プログラミング経験者のためのRuby入門書です。
+  author: 伊藤 淳一
+  picture: /uploads/book/picture/2/cherry-book.jpg
 
-two:
-  title: MyString
-  memo: MyText
+erd:
+  title: 楽々ERDレッスン
+  memo: 実在する帳票から本当に使えるテーブル設計を導く画期的な本！
+  author: 羽生 章洋
+  picture: /uploads/book/picture/3/erd.jpg
+
+<% 99.times do |n| %>
+book_<%= n %>:
+  title:  <%= "Book #{n}" %>
+  memo:  <%= "memo #{n}" %>
+  author:  <%= "author#{n}" %>
+  picture: <%= "/updoads/book/picture/#{n}/#{n}.jpg" %>
+<% end %>
