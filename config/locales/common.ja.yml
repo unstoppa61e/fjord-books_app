@@ -1,0 +1,25 @@
+ja:
+  books:
+    index:
+      destroy: 削除
+      title: 図書一覧
+      confirm: 本当によろしいですか？
+      add: 追加
+    new:
+      title: 図書データの追加
+    edit:
+      title: 図書データの編集
+    create:
+      notice: 図書データを作成しました。
+    update:
+      notice: 図書データを更新しました。
+    destroy:
+      notice: 図書データを削除しました。
+  layouts:
+    header:
+      English: 英語
+      Japanese: 日本語
+  button:
+    back: 戻る
+    edit: 編集
+    show: 詳細

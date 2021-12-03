@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      book: Book
+
+    attributes:
+      book:
+        author: Author
+        memo: Memo
+        picture: Picture
+        title: Title

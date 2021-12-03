@@ -1,0 +1,25 @@
+en:
+  books:
+    index:
+      destroy: Destroy
+      title: Books
+      confirm: "Are you sure?"
+      add: "New Book"
+    new:
+      title: "New Book"
+    edit:
+      title: "Editing Book"
+    create:
+      notice: "Book was successfully created."
+    update:
+      notice: "Book was successfully updated."
+    destroy:
+      notice: "Book was successfully destroyed."
+  layouts:
+    header:
+      English: English
+      Japanese: Japanese
+  button:
+    back: Back
+    edit: Edit
+    show: Show
