@@ -3,7 +3,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.1'
+ruby '3.0.2'
+
+gem 'devise', '~> 4.8'
+gem 'devise-i18n', '~> 1.10'
+gem 'kaminari', '~> 1.2', '>= 1.2.1'
+gem 'letter_opener_web', '~> 1.4'
+gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0'
@@ -58,4 +64,3 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'carrierwave'
-gem 'kaminari'

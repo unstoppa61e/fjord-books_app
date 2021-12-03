@@ -1,0 +1,22 @@
+<h1><%= t('.title') %></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th><%= User.human_attribute_name(:email) %></th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= link_to t('views.common.show'), user %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= paginate @users %>

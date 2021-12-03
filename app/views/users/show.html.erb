@@ -1,0 +1,25 @@
+<h1><%= t('.title') %></h1>
+<p>
+  <strong><%= User.human_attribute_name(:email) %>:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:postal_code) %>:</strong>
+  <%= @user.postal_code %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:address) %>:</strong>
+  <%= @user.address %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:bio) %>:</strong>
+  <%= @user.bio %>
+</p>
+
+<% if @user == current_user %>
+  <%= link_to t('views.common.edit'), edit_user_registration_path %>
+<% end %>
+<%= link_to t('views.common.back'), users_path %>

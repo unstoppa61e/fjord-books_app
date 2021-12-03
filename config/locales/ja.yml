@@ -226,3 +226,12 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+  layouts:
+    header:
+      log_in: ログイン
+      log_out: ログアウト
+  users:
+    index:
+      title: ユーザー一覧
+    show:
+      title: ユーザー詳細
